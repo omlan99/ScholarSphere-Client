@@ -3,20 +3,21 @@ import useAuth from "../Hook/useAuth";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, signOutUser } = useAuth();
   const navOptions = (
     <>
-      <li>
-        <a>Item 1</a>
+    <li>
+        <Link>Home</Link>
       </li>
       <li>
-        <a href="">Item 2</a>
+      <Link>All Scholarship</Link>
       </li>
-      <li>
-        <a>Item 3</a>
-      </li>
+      {user && !user.role && (<li><Link>User Dashboard</Link></li>) }
+      {user?.role === 'admin' &&   ( <li><Link>Admin Dashboard</Link></li>)}
+      {user?.role === 'moderator' && (<li><Link>Moderator Dashboard</Link></li>)}
     </>
   );
-  const { user, signOutUser } = useAuth();
+
 
   const handleLogOut = () => {
     signOutUser()
@@ -64,9 +65,17 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <Link onClick={handleLogOut} className="btn">
-            Logout
-          </Link>
+            <div className="flex items-center gap-4">
+            <p>{user?.displayName}</p>
+            <div className="avatar">
+              <div className="w-12">
+                <img src={user?.photoURL} />
+              </div>
+            </div>
+            <Link onClick={handleLogOut} className="btn">
+              Logout
+            </Link>
+          </div>
         ) : (
           <Link to={"/login"} className="btn">
             Login

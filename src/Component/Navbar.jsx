@@ -6,6 +6,7 @@ const Navbar = () => {
               </li>
               <li><a>Item 3</a></li>
     </>
+    
     return (
         <div className="navbar bg-base-100">
         <div className="navbar-start">

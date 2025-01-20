@@ -66,7 +66,7 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
             <div className="flex items-center gap-4">
-            <p>{user?.displayName}</p>
+            <p className="font-semibold">{user?.displayName}</p>
             <div className="avatar">
               <div className="w-12">
                 <img src={user?.photoURL} />

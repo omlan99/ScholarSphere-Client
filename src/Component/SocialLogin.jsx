@@ -2,6 +2,7 @@ import useAuth from "../Hook/useAuth";
 import useAxiosPublic from "../Hook/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
     const {googleSignIn} = useAuth()
@@ -11,6 +12,13 @@ const SocialLogin = () => {
         googleSignIn()
         .then(result=> {
             console.log(result.user)
+               Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successful",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
             const userInfo = {
                 email : result.user?.email,
                 name : result.user?.displayName
@@ -18,9 +26,9 @@ const SocialLogin = () => {
             // axiosPublic.post('/users', userInfo)
             // .then(res => {
             //     console.log(res.data)
-            //     navigate('/')
             // })
-
+            
+                navigate('/')
         })
       }
     return (

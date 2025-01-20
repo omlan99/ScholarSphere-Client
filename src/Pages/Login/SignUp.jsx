@@ -5,6 +5,7 @@ import SocialLogin from "../../Component/SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
+import ToggleBtn from "../../Component/ToggleBtn";
 
 const SignUp = () => {
   const {createUser} = useAuth()
@@ -33,7 +34,7 @@ const SignUp = () => {
   return (  
     <div>
       <Helmet><title>ScholarSphere | SignUp</title></Helmet>
-        <h1 className="text-5xl font-bold text-center my-4">Create a new Account</h1>
+      
 
       <div className="min-h-screen flex items-center justify-center gap-5  p-10">
         <div className="hidden lg:block">
@@ -41,7 +42,8 @@ const SignUp = () => {
         </div>
 
         <div className="card bg-base-100 border w-full max-w-xl shrink-0 ">
-        
+        <h1 className="text-3xl font-bold text-center mt-8">Create a new Account</h1>
+          <ToggleBtn></ToggleBtn>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
               <label className="label">

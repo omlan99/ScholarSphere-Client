@@ -5,10 +5,11 @@ import SocialLogin from "../../Component/SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
+import ToggleBtn from "../../Component/ToggleBtn";
 
 const Login = () => {
   const { signInUser } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,7 +25,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate('/')
+      navigate("/");
     });
   };
 
@@ -33,6 +34,7 @@ const Login = () => {
       <Helmet>
         <title>ScholarSphere | Login</title>
       </Helmet>
+
       <h1 className="text-5xl font-bold text-center my-4">
         Login to your account
       </h1>
@@ -42,6 +44,7 @@ const Login = () => {
         </div>
 
         <div className="card bg-base-100 w-full border max-w-xl shrink-0 ">
+          <ToggleBtn></ToggleBtn>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
               <label className="label">

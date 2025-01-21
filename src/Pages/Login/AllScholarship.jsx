@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import SectionTitle from "../../Component/SectionTitle";
-import useCommonAxios from "../../Hook/useCommonAxios";
 import useScholarship from "../../Hook/useScholarship";
 import Card from "../../Component/Card";
+import { FcSearch } from "react-icons/fc";
+import { FaFaceSadCry } from "react-icons/fa6";
 
 const AllScholarship = () => {
   const [search, setSearch] = useState("");
@@ -10,7 +11,7 @@ const AllScholarship = () => {
   const [scholarships, loading] = useScholarship(find);
   const handleSearch = () => {
     setFind(search);
-    console.log(search);
+  
   };
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -25,7 +26,7 @@ const AllScholarship = () => {
     <div>
       {loading ? (
         <>
-          <div className="max-h-screen flex justify-center  mx-auto">
+          <div className="min-h-screen flex justify-center  mx-auto">
             <div>
               {" "}
               <progress className="progress w-56"></progress>
@@ -39,7 +40,7 @@ const AllScholarship = () => {
 
             <div>
               <div>
-                <div className="flex gap-5 my-10 justify-center px-5">
+                <div className="flex justify-center gap-5 my-10 ">
                   <input
                     value={search}
                     onChange={handleInputChange}
@@ -53,11 +54,19 @@ const AllScholarship = () => {
                 </div>
               </div>
               <div>
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 p-5">
-                  {scholarships.map((scholarship, idx) => (
-                    <Card scholarship={scholarship} key={idx}></Card>
-                  ))}
-                </div>
+               {
+                scholarships.length > 0 ? <> <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 p-5">
+                {scholarships.map((scholarship, idx) => (
+                  <Card scholarship={scholarship} key={idx}></Card>
+                ))}
+              </div></> : <>
+              <div className="bg-gray-400 min-h-screen flex justify-center items-center text-center">
+                    <div>
+                        <FaFaceSadCry className="mx-auto text-5xl text-yellow-300"></FaFaceSadCry>
+                    <p className="text-2xl font-semibold py-3">Sorry we did not find any result</p>
+                    </div>
+                </div></>
+               }
               </div>
             </div>
           </div>

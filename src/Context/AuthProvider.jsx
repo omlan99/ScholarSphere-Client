@@ -5,14 +5,13 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import auth from "../Firebase/firebase.init";
-import useAxiosPublic from "../Hook/useAxiosPublic";
+import useCommonAxios from "../Hook/useCommonAxios";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -20,7 +19,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
-  const axiosPublic = useAxiosPublic();
+  const axiosCommon = useCommonAxios();
 
   const createUser = (email, password) => {
     setLoader(true);
@@ -45,14 +44,14 @@ const AuthProvider = ({ children }) => {
           email: loggedUser.email,
         };
         console.log(userInfo);
-        // axiosPublic.post('/jwt',userInfo)
-        // .then(res => {
-        //   console.log(res)
-        //   if(res.data){
-        //     localStorage.setItem('access-token', res.data)
-        //   }
+        axiosCommon.post('/jwt',userInfo)
+        .then(res => {
+          console.log(res)
+          if(res.data){
+            localStorage.setItem('access-token', res.data)
+          }
 
-        // })
+        })
       } else {
         localStorage.removeItem("access-token");
       }
@@ -61,7 +60,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [axiosPublic]);
+  }, [axiosCommon]);
   const updateUser = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,

@@ -10,7 +10,7 @@ const Navbar = () => {
         <Link>Home</Link>
       </li>
       <li>
-      <Link>All Scholarship</Link>
+      <Link to={'/AllScholarship'}>All Scholarship</Link>
       </li>
       {user && !user.role && (<li><Link>User Dashboard</Link></li>) }
       {user?.role === 'admin' &&   ( <li><Link>Admin Dashboard</Link></li>)}
@@ -58,7 +58,7 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">ScholarSphere</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>

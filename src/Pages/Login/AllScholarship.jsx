@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import SectionTitle from "../../Component/SectionTitle";
 import useCommonAxios from "../../Hook/useCommonAxios";
 import useScholarship from "../../Hook/useScholarship";
 import Card from "../../Component/Card";
 
 const AllScholarship = () => {
-  const [scholarships, loading] = useScholarship();
-
+    const [search, setSearch] = useState("")
+  const [scholarships, loading] = useScholarship(search);
+   
   return (
     <div>
       {loading ? (
@@ -26,6 +27,7 @@ const AllScholarship = () => {
                   <div>
                     <div>
                       <input
+                      onChange={(e) => setSearch(e.target.value)}
                         className="input input-bordered join-item"
                         placeholder="Search"
                       />
@@ -38,8 +40,8 @@ const AllScholarship = () => {
               </div>
               <div>
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10">
-                  {scholarships.map((scholarship) => (
-                    <Card scholarship={scholarship}></Card>
+                  {scholarships.map((scholarship, idx) => (
+                    <Card scholarship={scholarship} key={idx}></Card>
                   ))}
                 </div>
               </div>

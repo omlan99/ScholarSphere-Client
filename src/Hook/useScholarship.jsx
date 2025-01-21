@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import useCommonAxios from "./useCommonAxios";
 
 
-const useScholarship = () => {
+const useScholarship = (search) => {
     const [scholarships, setScholarships] = useState([])
     const axiosCommon = useCommonAxios() 
     const [loading, setLoading] = useState(true)
+    console.log(search)
     useEffect(()=>{
         setTimeout(() => {
-            axiosCommon.get('/scholarship')
+            axiosCommon.get(`/scholarship?search=${search}`)
             .then(res => {
                 setScholarships(res.data)
                 setLoading(false)
@@ -16,7 +17,7 @@ const useScholarship = () => {
           }, 1000);
             
                 
-    }, [])
+    }, [search])
     return [scholarships, loading]
 };
 

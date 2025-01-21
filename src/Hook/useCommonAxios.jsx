@@ -6,7 +6,7 @@ const axiosCommon = axios.create({
 })
 
 const useCommonAxios = () => {
-    return axiosCommon
+    return axiosCommon  
 };
 
 export default useCommonAxios;

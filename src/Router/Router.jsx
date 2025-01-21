@@ -7,7 +7,9 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/Login/SignUp";
 import ErrorPage from "../Pages/Error/ErrorPage";
-import AllScholarship from "../Pages/Login/AllScholarship";
+import AllScholarship from "../Pages/Scholarship/AllScholarship";
+import ScholarshipDetails from "../Pages/Scholarship/ScholarshipDetails";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +25,14 @@ export const router = createBrowserRouter([
           path: '/AllScholarship',
           element : <AllScholarship></AllScholarship>
 
+        },
+        {
+          path: "/scholarshipDetails/:id",
+          element : <ScholarshipDetails></ScholarshipDetails>
+        },
+        {
+          path: "/payment/:charge",
+          element: <Payment></Payment>
         },
         {
             path: "/signup",

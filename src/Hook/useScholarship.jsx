@@ -8,14 +8,14 @@ const useScholarship = (find) => {
     const [loading, setLoading] = useState(true)
     console.log(find)
     useEffect(()=>{
-        setTimeout(() => {
+      
             axiosCommon.get(`/scholarship?search=${find}`)
             .then(res => {
                 setScholarships(res.data)
+                setLoading(false)
             })
-          }, 1000);
+         
           
-          setLoading(false)
                 
     }, [find])
     return [scholarships, loading]

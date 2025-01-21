@@ -6,24 +6,42 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
 import ToggleBtn from "../../Component/ToggleBtn";
+import useCommonAxios from "../../Hook/useCommonAxios";
 
 const SignUp = () => {
-  const {createUser} = useAuth()
+  const {createUser, updateUser} = useAuth()
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const axiosCommon = useCommonAxios()
+  const { register, handleSubmit, formState: { errors } ,reset} = useForm();
   const onSubmit = data =>{
     console.log(data)
     createUser(data.email, data.password)
     .then(result =>{
-      console.log(result.user)
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Created an Account Successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-      navigate('/')
+      updateUser(data.name, data.photo)
+      .then(()=> {
+        const userInfo = {
+          name : data.name,
+          email : data.email,
+          image : data.photo
+
+        }
+        axiosCommon.post('/users',userInfo)
+        .then(res => {
+          if(res.data.insertedId){
+            reset()
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Created an Account Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+        navigate('/')
+          }
+        })
+      })
+    
+       
     
     })
     .catch(error=> {

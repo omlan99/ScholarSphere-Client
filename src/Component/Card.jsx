@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ scholarship }) => {
   const {
+    _id,
     application_deadline,
     application_fees,
     post_date,
@@ -45,7 +46,7 @@ const Card = ({ scholarship }) => {
 
           <p>  <span className="font-semibold">Stipend</span> : {stipend}</p>
           <div className="card-actions justify-end mt-5">
-            <Link>
+            <Link to={`/scholarshipDetails/${_id}`}>
               <button className="btn btn-primary">Details</button>
             </Link>
           </div>

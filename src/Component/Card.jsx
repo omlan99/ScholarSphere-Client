@@ -19,7 +19,7 @@ const Card = ({ scholarship }) => {
 
   return (
     <div>
-      <div className="card bg-base-100   border-2 sm:w-80 md:w-96  border-indigo-200 grow">
+      <div className="card bg-base-100   border-2 sm:w-80 md:w-96 h border-indigo-200 grow">
         <figure>
           <img
             className="w-[100px] mt-4"

@@ -19,8 +19,8 @@ const Card = ({ scholarship }) => {
 
   return (
     <div>
-      <div className="card bg-base-100   border-2 sm:w-80 md:w-96 h border-indigo-200 grow">
-        <figure>
+      <div className="card bg-base-100 h-[650px]  border-2 w-80 xl:w-96 border-indigo-200 grow">
+        <figure className="h-[200px]">
           <img
             className="w-[100px] mt-4"
             src={university_image}
@@ -34,17 +34,17 @@ const Card = ({ scholarship }) => {
           </p>
           <p> <span className="font-semibold">Subject </span> : {subject_name}</p>
           <p> <span className="font-semibold">Description </span>  : {scholarship_description}</p>
-          <div className="flex">
+       
           <p> <span className="font-semibold">Category </span> : {scholarship_category}</p>
           <p> <span className="font-semibold">Post date </span> : {post_date}</p>
-          </div>
+       
           <p> <span className="font-semibold">Application Deadline </span> : {application_deadline}</p>
-         <div className="flex">
+    
          <p>  <span className="font-semibold">Application Fees</span> : {application_fees}</p>
          <p> <span className="font-semibold">Service Charge </span> : {service_charge}</p>
-         </div>
+
           <p>  <span className="font-semibold">Stipend</span> : {stipend}</p>
-          <div className="card-actions justify-end">
+          <div className="card-actions justify-end mt-5">
             <Link>
               <button className="btn btn-primary">Details</button>
             </Link>

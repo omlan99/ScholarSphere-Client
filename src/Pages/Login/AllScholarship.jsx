@@ -39,7 +39,7 @@ const AllScholarship = () => {
 
             <div>
               <div>
-                <div className="flex gap-5 my-10 justify-center">
+                <div className="flex gap-5 my-10 justify-center px-5">
                   <input
                     value={search}
                     onChange={handleInputChange}

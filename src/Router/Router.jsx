@@ -9,9 +9,9 @@ import SignUp from "../Pages/Login/SignUp";
 import ErrorPage from "../Pages/Error/ErrorPage";
 import AllScholarship from "../Pages/Scholarship/AllScholarship";
 import ScholarshipDetails from "../Pages/Scholarship/ScholarshipDetails";
-// import Payment from "../Component/Payment";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyProfile from "../Pages/Dashbaord/MyProfile";
+import Payment from "../Pages/payment/Payment";
 
 
 export const router = createBrowserRouter([
@@ -34,10 +34,10 @@ export const router = createBrowserRouter([
           element : <ScholarshipDetails></ScholarshipDetails>
         },
      
-        // {
-        //   path: "/payment/:charge",
-        //   element: <Payment></Payment>
-        // },
+        {
+          path: "/payment/:charge",
+          element: <Payment></Payment>
+        },
         {
             path: "/signup",
             element: <SignUp></SignUp>

@@ -9,7 +9,10 @@ import SignUp from "../Pages/Login/SignUp";
 import ErrorPage from "../Pages/Error/ErrorPage";
 import AllScholarship from "../Pages/Scholarship/AllScholarship";
 import ScholarshipDetails from "../Pages/Scholarship/ScholarshipDetails";
-import Payment from "../Pages/Payment/Payment";
+// import Payment from "../Component/Payment";
+import DashboardLayout from "../Layout/DashboardLayout";
+import MyProfile from "../Pages/Dashbaord/MyProfile";
+
 
 export const router = createBrowserRouter([
     {
@@ -30,10 +33,11 @@ export const router = createBrowserRouter([
           path: "/scholarshipDetails/:id",
           element : <ScholarshipDetails></ScholarshipDetails>
         },
-        {
-          path: "/payment/:charge",
-          element: <Payment></Payment>
-        },
+     
+        // {
+        //   path: "/payment/:charge",
+        //   element: <Payment></Payment>
+        // },
         {
             path: "/signup",
             element: <SignUp></SignUp>
@@ -43,6 +47,16 @@ export const router = createBrowserRouter([
             element: <Login></Login>
         },
 
+      ]
+    },
+    {
+      path : 'dashboard',
+      element : <DashboardLayout></DashboardLayout>,
+      children : [
+        {
+          path : 'myprofile',
+          element : <MyProfile></MyProfile>
+        }
       ]
     },
   ]); 

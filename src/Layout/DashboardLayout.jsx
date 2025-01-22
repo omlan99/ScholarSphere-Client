@@ -1,6 +1,6 @@
 import React from "react";
 import useAuth from "../Hook/useAuth";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
     const {user} = useAuth()
@@ -17,10 +17,10 @@ const DashboardLayout = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {/* Sidebar content here */}
 
-            {
-                user && !user.role && (<>
+            {/* { */}
+                {/* user && !user.role && (<> */}
                 <li>
-                    <Link>My profile</Link>
+                    <Link to={'/dashboard/myprofile'}>My profile</Link>
                 </li>
                 <li>
                     <Link>My Application</Link>
@@ -28,12 +28,12 @@ const DashboardLayout = () => {
                 <li>
                     <Link>My Review</Link>
                 </li>
-                </>)
-            }
-            {
-                user?.role === 'moderator' && (<>
+                {/* </>) */}
+            {/* } */}
+            {/* { */}
+                {/* user?.role === 'moderator' && (<> */}
                 <li>
-                    <Link>My Profile</Link>
+                    <Link to={'/dashboard/myprofile'}>My Profile</Link>
                 </li>
                 <li>
                     <Link>Manage Scholarship</Link>
@@ -46,12 +46,13 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                     <Link>Add Scholarship</Link>
-                </li></>) 
-            }
-            {
-                user?.role === 'admin' && (<>
+                </li>
+                {/* </>)  */}
+            {/* } */}
+            {/* { */}
+                {/* user?.role === 'admin' && (<> */}
                 <li>
-                    <Link>Admin Profile.</Link>
+                    <Link to={'/dashboard/myprofile'}>Admin Profile.</Link>
                 </li>
                 <li>
                     <Link>Add Scholarship</Link>
@@ -68,8 +69,8 @@ const DashboardLayout = () => {
                 <li>
                     <Link>Manage Review</Link>
                 </li>
-                </>)
-            }
+                {/* </>) */}
+            {/* } */}
             <li>
               <a>Sidebar Item 1</a>
             </li>
@@ -80,12 +81,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* Page content here */}
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
-          >
-            Open drawer
-          </label>
+         <Outlet></Outlet>
         </div>
     
       </div>

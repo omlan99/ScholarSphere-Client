@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useCommonAxios from "./useCommonAxios";
+import useAuth from "./useAuth";
 
 
 const useScholarship = (find) => {

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
+  console.log(user)
   const navOptions = (
     <>
     <li>
@@ -12,9 +13,9 @@ const Navbar = () => {
       <li>
       <Link to={'/AllScholarship'}>All Scholarship</Link>
       </li>
-      {user && !user.role && (<li><Link>User Dashboard</Link></li>) }
-      {user?.role === 'admin' &&   ( <li><Link>Admin Dashboard</Link></li>)}
-      {user?.role === 'moderator' && (<li><Link>Moderator Dashboard</Link></li>)}
+      {user && !user.role && (<li><Link to={"dashboard"}>User Dashboard</Link></li>) }
+      {user?.role === 'admin' &&   ( <li><Link to={"dashboard"}>Admin Dashboard</Link></li>)}
+      {user?.role === 'moderator' && (<li><Link to={"dashboard"}>Moderator Dashboard</Link></li>)}
     </>
   );
 

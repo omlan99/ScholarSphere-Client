@@ -10,11 +10,17 @@ const useScholarship = (find) => {
     console.log(find)
     useEffect(()=>{
       
+           if(find){
             axiosCommon.get(`/scholarship?search=${find}`)
             .then(res => {
                 setScholarships(res.data)
                 setLoading(false)
             })
+           }
+           axiosCommon.get('/scholarship')
+           .then(res => {
+            console.log(res.data)
+           })
          
           
                 

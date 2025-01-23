@@ -3,6 +3,7 @@ import useCommonAxios from '../../Hook/useCommonAxios';
 import { FcViewDetails } from 'react-icons/fc';
 import { FaRegEdit } from 'react-icons/fa';
 import { TiDelete } from 'react-icons/ti';
+import useScholarship from '../../Hook/useScholarship';
 
 const ManageScholarship = () => {
     const [scholarships, setScholarships] = useState([])
@@ -14,7 +15,12 @@ const ManageScholarship = () => {
         console.log(scholarships)
       })
     }, [])
-   
+
+    const handleDelete = (id) =>{
+      axiosCommon.delete(`/scholarship/${id}`)
+      .then(res => console.log(res.data))
+     }
+    
     return (
         <div>
               <div className="overflow-x-auto">
@@ -22,13 +28,7 @@ const ManageScholarship = () => {
           {/* head */}
           <thead>
             <tr>
-                {/* •	Scholarship name,
-•	,
-•	Subject Category,
-•	Degree,
-•	Application Fees,
-•	Three-button Details, Edit, Cancel 
- */}
+ 
               <th></th>
               <th>University Name</th>
               <th>Subject</th>
@@ -51,9 +51,9 @@ const ManageScholarship = () => {
                 <td>{scholarship.scholarship_category}</td>
                 <td></td>
                 <td>{scholarship.application_fees}</td>
-                <td><FcViewDetails></FcViewDetails></td>
-                <td><FaRegEdit></FaRegEdit></td>
-                <td><TiDelete /></td>
+                <td><FcViewDetails className='text-2xl'></FcViewDetails></td>
+                <td><FaRegEdit className='text-2xl'></FaRegEdit></td>
+                <td><TiDelete className='text-2xl' onClick={() => handleDelete(scholarship._id)} /></td>
               </tr>)
             }
            

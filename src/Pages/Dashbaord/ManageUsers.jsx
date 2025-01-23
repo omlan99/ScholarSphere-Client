@@ -12,12 +12,12 @@ const ManageUsers = () => {
     });
   }, []);
 
-  const handleDelete = (id) =>{
+//   const handleDelete = (id) =>{
  
-        axiosCommon.delete(`/users/${id}`)
-        .then(res => console.log(res.data   ))
+//         axiosCommon.delete(`/users/${id}`)
+//         .then(res => console.log(res.data   ))
 
-  }
+//   }
   return (
     <div>
       <div className="overflow-x-auto">

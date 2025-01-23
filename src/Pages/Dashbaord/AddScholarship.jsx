@@ -90,34 +90,39 @@ const AddScholarship = () => {
             <label className="label">
               <span className="label-text">Scholarship Category</span>
             </label>
-            <input
-              type="text"
-              placeholder="Scholarship Name"
-              className="input input-bordered max-w-sm"
-              {...register("scholarship_category", { required: true })}
-            />
+            <select className="select select-bordered max-w-sm "  {...register("scholarship_category", { required: true })} >
+              <option value="full-fund">Full-Fund</option>
+              <option value="partial">Partial</option>
+              <option value="self-fund">Self-Fund</option>
+            </select>
+          
           </div>
           <div className="form-control ">
             <label className="label">
               <span className="label-text">Subject Category</span>
             </label>
-            <input
-              type="text"
-              placeholder="Category"
-              className="input input-bordered max-w-sm"
-              {...register("subject_category", { required: true })}
-            />
+            <select className="select select-bordered max-w-sm "   {...register("subject_category", { required: true })} >
+                  <option value="Agriculture">Agriculture</option>
+                  <option value="Engineering">Eingineering</option>
+                  <option value="Doctor"></option>
+            </select>
+            
           </div>
           <div className="form-control ">
             <label className="label">
               <span className="label-text">Degree</span>
             </label>
-            <input
+            {/* <input
               type="text"
               placeholder="Scholarship Name"
               className="input input-bordered max-w-sm"
               {...register("degree", { required: true })}
-            />
+            /> */}
+            <select className="select select-bordered max-w-sm "  {...register("degree", { required: true })} >
+              <option value="Diploma">Diploma</option>
+              <option value="Bachelor">Bachelor</option>
+              <option value="Masters">Masters</option>
+            </select>
           </div>
           <div className="form-control ">
             <label className="label">
@@ -188,7 +193,7 @@ const AddScholarship = () => {
           </div>
 
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary" type="submit">Login</button>
           </div>
         </form>
       </div>

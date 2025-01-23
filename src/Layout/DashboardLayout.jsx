@@ -36,7 +36,7 @@ const DashboardLayout = () => {
                     <Link to={'/dashboard/myprofile'}>My Profile</Link>
                 </li>
                 <li>
-                    <Link>Manage Scholarship</Link>
+                    <Link to={'/dashboard/manageScholarship'}>Manage Scholarship</Link>
                 </li>
                 <li>
                     <Link>All Reviews</Link>
@@ -58,7 +58,7 @@ const DashboardLayout = () => {
                     <Link>Add Scholarship</Link>
                 </li>
                 <li>
-                    <Link>Manage Scholarship.</Link>
+                    <Link to={'/dashboard/manageScholarship'} >Manage Scholarship.</Link>
                 </li>
                 <li>
                     <Link>Manage Applied Application</Link>
@@ -79,7 +79,8 @@ const DashboardLayout = () => {
             </li>
           </ul>
         </div>
-        <div className="drawer-content flex flex-col items-center justify-center">
+        {/* flex flex-col items-center justify-center */}
+        <div className="drawer-content p-7">
           {/* Page content here */}
          <Outlet></Outlet>
         </div>

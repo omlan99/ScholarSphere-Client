@@ -12,6 +12,7 @@ import ScholarshipDetails from "../Pages/Scholarship/ScholarshipDetails";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyProfile from "../Pages/Dashbaord/MyProfile";
 import Payment from "../Pages/payment/Payment";
+import ManageScholarship from "../Pages/Dashbaord/ManageScholarship";
 
 
 export const router = createBrowserRouter([
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
         {
           path : 'myprofile',
           element : <MyProfile></MyProfile>
+        },
+        {
+          path: 'manageScholarship',
+          element : <ManageScholarship></ManageScholarship>
         }
       ]
     },

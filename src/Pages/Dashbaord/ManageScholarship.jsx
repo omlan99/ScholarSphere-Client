@@ -6,19 +6,18 @@ import { TiDelete } from 'react-icons/ti';
 import useScholarship from '../../Hook/useScholarship';
 
 const ManageScholarship = () => {
-    const [scholarships, setScholarships] = useState([])
     const axiosCommon = useCommonAxios()
-    useEffect(() => {
-      axiosCommon.get('/scholarship')
-      .then(res => {
-        setScholarships(res.data)
-        console.log(scholarships)
-      })
-    }, [])
-
+    const [scholarships, refetch] = useScholarship("")
+  console.log(scholarships)
     const handleDelete = (id) =>{
       axiosCommon.delete(`/scholarship/${id}`)
-      .then(res => console.log(res.data))
+      .then(res => {
+        if(res.data.deletedCount){
+          console.log(res.data)
+          refetch()
+
+        }
+      })
      }
     
     return (

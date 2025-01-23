@@ -8,7 +8,7 @@ import { FaFaceSadCry } from "react-icons/fa6";
 const AllScholarship = () => {
   const [search, setSearch] = useState("");
   const [find, setFind] = useState("");
-  const [scholarships, loading] = useScholarship(find);
+  const [scholarships] = useScholarship(find);
   const handleSearch = () => {
     setFind(search);
   
@@ -24,17 +24,8 @@ const AllScholarship = () => {
   };
   return (
     <div>
-      {loading ? (
-        <>
-          <div className="min-h-screen flex justify-center  mx-auto">
-            <div>
-              {" "}
-              <progress className="progress w-56"></progress>
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
+      
+        
           <div>
             <SectionTitle heading={"All Scholarship"}></SectionTitle>
 
@@ -70,8 +61,7 @@ const AllScholarship = () => {
               </div>
             </div>
           </div>
-        </>
-      )}
+        
     </div>
   );
 };

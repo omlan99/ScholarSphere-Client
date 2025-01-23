@@ -1,31 +1,24 @@
 import { useEffect, useState } from "react";
 import useCommonAxios from "./useCommonAxios";
 import useAuth from "./useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { set } from "react-hook-form";
 
 
 const useScholarship = (find) => {
-    const [scholarships, setScholarships] = useState([])
-    const axiosCommon = useCommonAxios() 
-    const [loading, setLoading] = useState(true)
+    const axiosCommon = useCommonAxios()  
     console.log(find)
-    useEffect(()=>{
-      
-           if(find){
-            axiosCommon.get(`/scholarship?search=${find}`)
-            .then(res => {
-                setScholarships(res.data)
-                setLoading(false)
-            })
-           }
-           axiosCommon.get('/scholarship')
-           .then(res => {
-            console.log(res.data)
-           })
-         
-          
-                
-    }, [find])
-    return [scholarships, loading]
+
+    const {refetch , data: scholarshipData=[] } =useQuery({
+        queryKey : ['scholarshipData', find],
+        queryFn : async () =>{
+            const res = await axiosCommon.get(`/scholarship?search=${find}`)
+                return res.data
+        },
+        enabled: !!find || find === "",
+    })
+
+    return [scholarshipData, refetch]
 };
 
 export default useScholarship;

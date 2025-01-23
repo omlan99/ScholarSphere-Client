@@ -31,7 +31,7 @@ const Card = ({ scholarship }) => {
         <div className="card-body">
           <h2 className="card-title">{university_name}</h2>
           <p>
-            {university_location.city}, {university_location.country}{" "}
+            {/* {university_location.city}, {university_location.country}{" "} */}
           </p>
           <p> <span className="font-semibold">Subject </span> : {subject_name}</p>
           <p> <span className="font-semibold">Description </span>  : {scholarship_description}</p>

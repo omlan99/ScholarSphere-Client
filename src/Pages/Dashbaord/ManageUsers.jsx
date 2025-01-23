@@ -11,6 +11,13 @@ const ManageUsers = () => {
       setUsers(res.data);
     });
   }, []);
+
+  const handleDelete = (id) =>{
+ 
+        axiosCommon.delete(`/users/${id}`)
+        .then(res => console.log(res.data   ))
+
+  }
   return (
     <div>
       <div className="overflow-x-auto">
@@ -41,7 +48,8 @@ const ManageUsers = () => {
                     <option>Admin</option>
                   </select>
                 </td>
-                <td><TiUserDelete className="text-2xl " />
+                <td>
+                    <button onClick={() => handleDelete(user._id)} className="btn"><TiUserDelete className="text-2xl"  /></button>
                 </td>
               </tr>
             ))}

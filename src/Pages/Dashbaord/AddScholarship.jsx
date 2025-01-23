@@ -1,7 +1,12 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../Component/SectionTitle";
+import useAuth from "../../Hook/useAuth";
+import useCommonAxios from "../../Hook/useCommonAxios";
+import Swal from "sweetalert2";
 
 const AddScholarship = () => {
+  const {user} = useAuth()
+  const axiosCommon = useCommonAxios()
   const {
     register,
     handleSubmit,
@@ -9,7 +14,24 @@ const AddScholarship = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    const scholarshipData = {...data, email : user.email, role: user?.role || ''}
+    console.log(scholarshipData)
+
+    axiosCommon.post('/scholarship', scholarshipData)
+    .then(res => {
+      console.log(res.data)
+  
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your Scholarship has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      
+    })
+
+   
   };
   return (
     <div>
@@ -90,7 +112,8 @@ const AddScholarship = () => {
             <label className="label">
               <span className="label-text">Scholarship Category</span>
             </label>
-            <select className="select select-bordered max-w-sm "  {...register("scholarship_category", { required: true })} >
+            <select defaultValue={"Scholarship Category"} className="select select-bordered max-w-sm "  {...register("scholarship_category", { required: true })} >
+              <option  disabled value="Scholarship Category">Scholarship Category  </option>
               <option value="full-fund">Full-Fund</option>
               <option value="partial">Partial</option>
               <option value="self-fund">Self-Fund</option>
@@ -101,10 +124,11 @@ const AddScholarship = () => {
             <label className="label">
               <span className="label-text">Subject Category</span>
             </label>
-            <select className="select select-bordered max-w-sm "   {...register("subject_category", { required: true })} >
+            <select defaultValue={"Subject Category"} className="select select-bordered max-w-sm "   {...register("subject_category", { required: true })} >
+                  <option disabled  value="Subject Category">Subject Category</option>
                   <option value="Agriculture">Agriculture</option>
-                  <option value="Engineering">Eingineering</option>
-                  <option value="Doctor"></option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Doctor">Doctor</option>
             </select>
             
           </div>
@@ -112,13 +136,9 @@ const AddScholarship = () => {
             <label className="label">
               <span className="label-text">Degree</span>
             </label>
-            {/* <input
-              type="text"
-              placeholder="Scholarship Name"
-              className="input input-bordered max-w-sm"
-              {...register("degree", { required: true })}
-            /> */}
-            <select className="select select-bordered max-w-sm "  {...register("degree", { required: true })} >
+            
+            <select defaultValue={'Degree Name'} className="select select-bordered max-w-sm "  {...register("degree", { required: true })} >
+              <option disabled   value='Degree Name  '>Degree Name</option>
               <option value="Diploma">Diploma</option>
               <option value="Bachelor">Bachelor</option>
               <option value="Masters">Masters</option>
@@ -187,7 +207,9 @@ const AddScholarship = () => {
               type="email"
               placeholder="Your email"
               className="input input-bordered max-w-sm"
-              {...register("email", { required: true })}
+              // {...register("email", { required: true })}
+              defaultValue ={user?.email}
+              disabled
             />
           </div>
           </div>

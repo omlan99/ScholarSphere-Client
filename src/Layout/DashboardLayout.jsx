@@ -64,7 +64,7 @@ const DashboardLayout = () => {
                     <Link>Manage Applied Application</Link>
                 </li>
                 <li>
-                    <Link>Manage Users.</Link>
+                    <Link to="/dashboard/manageUsers">Manage Users.</Link>
                 </li>
                 <li>
                     <Link>Manage Review</Link>

@@ -13,6 +13,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import MyProfile from "../Pages/Dashbaord/MyProfile";
 import Payment from "../Pages/payment/Payment";
 import ManageScholarship from "../Pages/Dashbaord/ManageScholarship";
+import ManageUsers from "../Pages/Dashbaord/ManageUsers";
 
 
 export const router = createBrowserRouter([
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
         {
           path: 'manageScholarship',
           element : <ManageScholarship></ManageScholarship>
+        },
+        {
+          path : 'manageUsers',
+          element : <ManageUsers></ManageUsers>
         }
       ]
     },

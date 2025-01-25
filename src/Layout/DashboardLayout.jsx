@@ -42,7 +42,7 @@ const DashboardLayout = () => {
                     <Link>All Reviews</Link>
                 </li>
                 <li>
-                    <Link>All applied Scholarship</Link>
+                    <Link to={"/dashboard/allApplication"}>All applied Scholarship</Link>
                 </li>
                 <li>
                     <Link to={'/dashboard/addScholarship'}>Add Scholarship</Link>

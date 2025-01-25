@@ -24,9 +24,9 @@ const MyProfile = () => {
         </div>
         <div>
           <p>Name : {profile.name} </p>
-        <p> Email : {profile.email}</p>
+          <p> Email : {profile.email}</p>
           {profile.role ? <p>{profile.role}</p> : <></>}
-        </div>  
+        </div>
       </div>
     </div>
   );

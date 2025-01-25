@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const CheckoutForm = ({ charge }) => {
-  console.log(charge)
+  console.log(charge);
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
@@ -21,18 +21,18 @@ const CheckoutForm = ({ charge }) => {
     });
   }, [charge]);
   console.log(scholarship);
-  const amount = scholarship
-  console.log(amount)
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset,
-    } = useForm({
-      // defaultValues: {
-      //   posted_date: new Date().toISOString().split("T")[0], // Set today's date in YYYY-MM-DD format
-      // },
-    });
+  const amount = scholarship;
+  console.log(amount);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    // defaultValues: {
+    //   posted_date: new Date().toISOString().split("T")[0], // Set today's date in YYYY-MM-DD format
+    // },
+  });
   useEffect(() => {
     axiosCommon
       .post("/create-payment-intent", { price: amount })
@@ -60,7 +60,7 @@ const CheckoutForm = ({ charge }) => {
     if (error) {
       console.log("payment error", error);
       setError(error.message);
-      toast.error(`${error.message}`, {position : "top-center"})
+      toast.error(`${error.message}`, { position: "top-center" });
     } else {
       console.log("payment method", paymentMethod);
       setError("");
@@ -82,9 +82,12 @@ const CheckoutForm = ({ charge }) => {
       if (paymentIntent.status === "succeeded") {
         console.log("transaction Id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
-        toast.success(`Your payment is successfull and your transaction Id is ${transactionId}`, {
-          position: "top-center",
-        });
+        toast.success(
+          `Your payment is successfull and your transaction Id is ${transactionId}`,
+          {
+            position: "top-center",
+          }
+        );
       }
     }
   };
@@ -114,8 +117,6 @@ const CheckoutForm = ({ charge }) => {
         >
           Pay
         </button>
-      
-       
       </form>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
       <button
@@ -134,9 +135,8 @@ const CheckoutForm = ({ charge }) => {
               </label>
               <input
                 type="text"
-                {...register("applicants_phone_numbre", {required : true})}
+                {...register("applicants_phone_numbre", { required: true })}
                 className="input input-bordered"
-             
               />
               {errors.applicant_phone_numbre && (
                 <p className="text-red-600">This Field is required</p>
@@ -149,151 +149,148 @@ const CheckoutForm = ({ charge }) => {
                 </label>
                 <input
                   type="text"
-                  {...register('applicants_village', {requred : true})}
+                  {...register("applicants_village", { requred: true })}
                   className="input input-bordered"
-                  
                 />
                 {errors.applicants_village && (
                   <p className="text-red-600">This Field is required</p>
                 )}
-          
-              </div> 
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">District</span>
                 </label>
                 <input
                   type="text"
-                  {...register('applicants_district', {requred : true})}
+                  {...register("applicants_district", { requred: true })}
                   className="input input-bordered"
-                  
                 />
                 {errors.applicants_district && (
                   <p className="text-red-600">This Field is required</p>
                 )}
-          
-              </div> 
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Country</span>
                 </label>
                 <input
                   type="text"
-                  {...register('applicants_country', {requred : true})}
+                  {...register("applicants_country", { requred: true })}
                   className="input input-bordered"
-                  
                 />
                 {errors.applicants_country && (
                   <p className="text-red-600">This Field is required</p>
                 )}
-          
-              </div> 
+              </div>
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Gender</span>
               </label>
-              <select defaultValue={""} {...register('gender', {required : true})} className="select select-bordered w-full max-w-xs">
-                <option disabled value= "">Gender</option>
+              <select
+                defaultValue={""}
+                {...register("gender", { required: true })}
+                className="select select-bordered w-full max-w-xs"
+              >
+                <option disabled value="">
+                  Gender
+                </option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
               {errors.gender && (
-                  <p className="text-red-600">This Field is required</p>
-                )}
-            </div>  
+                <p className="text-red-600">This Field is required</p>
+              )}
+            </div>
             <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Rsult of SSC</span>
-                </label>
-                <input
-                  type="number"
-                  {...register('ssc_result', {requred : true})}
-                  className="input input-bordered"
-                  
-                />
-                {errors.ssc_result && (
-                  <p className="text-red-600">This Field is required</p>
-                )}
-          
-              </div> 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Results of HSC</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('hsc_result', {requred : true})}
-                  className="input input-bordered"
-                  
-                />
-                {errors.hsc_result && (
-                  <p className="text-red-600">This Field is required</p>
-                )}
-          
-              </div> 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Sudy Gap (otional)</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('applicants_village')}
-                  className="input input-bordered"
-                  
-                />
-         
-              </div> 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">University Name</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('applicants_village')}
-                  className="input input-bordered"
-                  readOnly
-                />
-         
-              </div> 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Scholarship Degree</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('applicants_village')}
-                  className="input input-bordered"
-                  readOnly
-                />
-         
-              </div> 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Subject Category</span>
-                </label>
-                <input
-                  type="text"
-                  {...register('applicants_village')}
-                  className="input input-bordered"
-                  readOnly
-                />
-         
-              </div> 
+              <label className="label">
+                <span className="label-text">Rsult of SSC</span>
+              </label>
+              <input
+                type="number"
+                {...register("ssc_result", { requred: true })}
+                className="input input-bordered"
+              />
+              {errors.ssc_result && (
+                <p className="text-red-600">This Field is required</p>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Results of HSC</span>
+              </label>
+              <input
+                type="text"
+                {...register("hsc_result", { requred: true })}
+                className="input input-bordered"
+              />
+              {errors.hsc_result && (
+                <p className="text-red-600">This Field is required</p>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Sudy Gap (otional)</span>
+              </label>
+              <input
+                type="text"
+                {...register("applicants_village")}
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">University Name</span>
+              </label>
+              <input
+                type="text"
+                {...register("applicants_village")}
+                className="input input-bordered"
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Scholarship Degree</span>
+              </label>
+              <input
+                type="text"
+                {...register("applicants_village")}
+                className="input input-bordered"
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Subject Category</span>
+              </label>
+              <input
+                type="text"
+                {...register("applicants_village")}
+                className="input input-bordered"
+                readOnly
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Applying For</span>
               </label>
-              <select defaultValue={""} {...register('degree', {required : true})} className="select select-bordered w-full max-w-xs">
-                <option disabled value= "">Degree</option>
+              <select
+                defaultValue={""}
+                {...register("degree", { required: true })}
+                className="select select-bordered w-full max-w-xs"
+              >
+                <option disabled value="">
+                  Degree
+                </option>
                 <option>Diploma</option>
                 <option>Bachelor</option>
                 <option>Masters</option>
               </select>
               {errors.degree && (
-                  <p className="text-red-600">This Field is required</p>
-                )}
-            </div>  
+                <p className="text-red-600">This Field is required</p>
+              )}
+            </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>

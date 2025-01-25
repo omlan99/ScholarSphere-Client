@@ -43,7 +43,7 @@ const AddScholarship = () => {
         application_fees: parseFloat(data.application_fees),
         service_charge: parseFloat(data.service_charge),
         application_deadline: data.application_deadline,
-        stipend : parseFloat( data.stipend),
+        stipend: parseFloat(data.stipend),
         email: user.email,
         role: user?.role || "",
       };
@@ -147,7 +147,6 @@ const AddScholarship = () => {
                 className="input input-bordered"
                 {...register("university_world_rank")}
               />
-            
             </div>{" "}
             <div className="form-control ">
               <label className="label">
@@ -253,7 +252,6 @@ const AddScholarship = () => {
                 className="input input-bordered max-w-sm"
                 {...register("stipend")}
               />
-             
             </div>
             <div className="form-control ">
               <label className="label">
@@ -283,7 +281,6 @@ const AddScholarship = () => {
                 <p className="text-red-600">This field is required</p>
               )}
             </div>
-       
             <div className="form-control ">
               <label className="label">
                 <span className="label-text">Scholarship Post Date</span>

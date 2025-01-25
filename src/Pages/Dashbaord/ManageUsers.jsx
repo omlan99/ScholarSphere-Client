@@ -12,12 +12,12 @@ const ManageUsers = () => {
     });
   }, []);
 
-//   const handleDelete = (id) =>{
- 
-//         axiosCommon.delete(`/users/${id}`)
-//         .then(res => console.log(res.data   ))
+  //   const handleDelete = (id) =>{
 
-//   }
+  //         axiosCommon.delete(`/users/${id}`)
+  //         .then(res => console.log(res.data   ))
+
+  //   }
   return (
     <div>
       <div className="overflow-x-auto">
@@ -42,14 +42,19 @@ const ManageUsers = () => {
                 <td className=" w-[20px]">
                   <select class="">
                     <option disabled selected>
-                    {user.role ? user.role : "user"}
+                      {user.role ? user.role : "user"}
                     </option>
                     <option>Moderator</option>
                     <option>Admin</option>
                   </select>
                 </td>
                 <td>
-                    <button onClick={() => handleDelete(user._id)} className="btn"><TiUserDelete className="text-2xl"  /></button>
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn"
+                  >
+                    <TiUserDelete className="text-2xl  mx-auto" />
+                  </button>
                 </td>
               </tr>
             ))}

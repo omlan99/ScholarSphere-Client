@@ -61,13 +61,13 @@ const MyApplication = () => {
               <td></td>
               <td></td>
               <td>
-                <FcViewDetails className="text-2xl"></FcViewDetails>
+                <FcViewDetails className="text-2xl  mx-auto"></FcViewDetails>
               </td>
               <td>
-                <FaRegEdit className="text-2xl"></FaRegEdit>
+                <FaRegEdit className="text-2xl  mx-auto"></FaRegEdit>
               </td>
               <td>
-                <TiDelete className="text-2xl" />
+                <TiDelete className="text-2xl  mx-auto" />
               </td>
             </tr>
           </tbody>

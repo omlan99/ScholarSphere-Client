@@ -9,7 +9,7 @@ import ToggleBtn from "../../Component/ToggleBtn";
 import useCommonAxios from "../../Hook/useCommonAxios";
 
 const SignUp = () => {
-  const { createUser, updateUser, setUser} = useAuth();
+  const { createUser, updateUser, setUser } = useAuth();
   const navigate = useNavigate();
   const axiosCommon = useCommonAxios();
   const {

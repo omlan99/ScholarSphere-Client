@@ -47,7 +47,7 @@ const ManageScholarship = () => {
                 <td></td>
                 <td>{scholarship.application_fees}</td>
                 <td>
-                  <FcViewDetails className="text-2xl  mx-auto"></FcViewDetails>
+                 <Link to=""><FcViewDetails className="text-2xl  mx-auto"></FcViewDetails></Link>
                 </td>
                 <td>
                   <FaRegEdit className="text-2xl  mx-auto"></FaRegEdit>

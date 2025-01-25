@@ -11,7 +11,7 @@ const ScholarshipDetails = () => {
     axiosCommon.get(`/scholarship/${id}`).then((res) => {
       setScholarShip(res.data);
     });
-  }, [id]);
+  }, []);
   console.log(scholarship);
   console.log(id);
 

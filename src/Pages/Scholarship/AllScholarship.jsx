@@ -8,7 +8,7 @@ import { FaFaceSadCry } from "react-icons/fa6";
 const AllScholarship = () => {
   const [search, setSearch] = useState("");
   const [find, setFind] = useState("");
-  const [scholarships] = useScholarship(find);
+  const [scholarships, isLoading] = useScholarship(find);
   const handleSearch = () => {
     setFind(search);
   };
@@ -21,11 +21,11 @@ const AllScholarship = () => {
       setFind(""); // Reset query to fetch all data
     }
   };
+ 
   return (
     <div>
       <div>
         <SectionTitle heading={"All Scholarship"}></SectionTitle>
-
         <div>
           <div>
             <div className="flex justify-center gap-5 my-10 ">

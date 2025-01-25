@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useCommonAxios from "./useCommonAxios";
+import useAuth from "./useAuth";
 
 const useUser = () => {
   const axiosCommon = useCommonAxios();
-
+  const {user} = useAuth()
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -12,7 +13,7 @@ const useUser = () => {
     },
   });
 
-  return [users, refetch];
+  return [users, user.email, refetch];
 };
 
 export default useUser;

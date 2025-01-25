@@ -4,9 +4,10 @@ import useCommonAxios from "../../Hook/useCommonAxios";
 import useAuth from "../../Hook/useAuth";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-
+import Swal from "sweetalert2";
+const image_hosting_key = import.meta.env.VITE_image_key;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CheckoutForm = ({ charge }) => {
-  console.log(charge);
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
@@ -15,34 +16,86 @@ const CheckoutForm = ({ charge }) => {
   const [clientSecret, setClientSecret] = useState("");
   const axiosCommon = useCommonAxios();
   const [scholarship, setScholarShip] = useState({});
+  const [userData, setUserData] = useState([]);
+  const [applied, setApplied] = useState(false);
   useEffect(() => {
     axiosCommon.get(`/scholarship/${charge}`).then((res) => {
       setScholarShip(res.data);
+      reset({
+        university_name: res.data.university_name,
+        scholarship_category: res.data.scholarship_category,
+        subject_category: res.data.subject_category,
+      });
     });
   }, [charge]);
-  console.log(scholarship.application_fees);
-  const amount = parseInt (scholarship.application_fees);
-  console.log(amount)
-  
-  console.log(typeof(amount));
+  useEffect(() => {
+    if (user?.email) {
+      axiosCommon.get(`/users?email=${user.email}`).then((res) => {
+        setUserData(res.data);
+      });
+    }
+  }, []);
+  const postingData = { userId: userData._id, ...userData };
+  console.log(postingData);
+  const amount = parseInt(scholarship.application_fees);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({
-    // defaultValues: {
-    //   posted_date: new Date().toISOString().split("T")[0], // Set today's date in YYYY-MM-DD format
-    // },
+    defaultValues: {
+      // posted_date: new Date().toISOString().split("T")[0], // Set today's date in YYYY-MM-DD format
+      university_name: scholarship.university_name,
+      scholarship_category: scholarship.scholarship_category,
+      subject_category: scholarship.subject_category,
+    },
   });
-  useEffect(() => {
-    if(typeof(amount) === "number" && amount > 0 ){
-      axiosCommon
-      .post("/create-payment-intent", { price: amount })
-      .then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
+  const onSubmit = async (data) => {
+    const applicationData = {
+      ...data,
+      ...postingData,
+      applied_date: new Date().toISOString().split("T")[0],
+    };
+    console.log(applicationData);
+    const imageFile = { image: data.applicant_photo[0] };
+
+    const images = await axiosCommon.post(image_hosting_api, imageFile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    if (images.data.success) {
+      const dataWithImage = {
+        ...applicationData,
+        applicant_photo: images.data.data.display_url,
+      };
+      axiosCommon.post("/applications", dataWithImage).then((res) => {
+        console.log(res.data);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your applied successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        document.getElementById("my_modal_4").close();
+        setApplied(true);
+        reset();
       });
+    }
+  };
+
+  useEffect(() => {
+    if (typeof amount === "number" && amount > 0) {
+      axiosCommon
+        .post("/create-payment-intent", { price: amount })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        });
     }
   }, [axiosCommon, amount]);
 
@@ -92,6 +145,7 @@ const CheckoutForm = ({ charge }) => {
             position: "top-center",
           }
         );
+        document.getElementById("my_modal_4").showModal();
       }
     }
   };
@@ -117,7 +171,7 @@ const CheckoutForm = ({ charge }) => {
         <button
           className="btn btn-primary mt-5"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || applied}
         >
           Pay
         </button>
@@ -132,7 +186,30 @@ const CheckoutForm = ({ charge }) => {
       <dialog id="my_modal_4" className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
           <h3 className="font-bold text-lg">Applicant Form</h3>
-          <form className="card-body grid md:grid-cols-2">
+          <form
+            className="card-body grid md:grid-cols-2"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Applying For</span>
+              </label>
+              <select
+                defaultValue={""}
+                {...register("degree", { required: true })}
+                className="select select-bordered w-full max-w-xs"
+              >
+                <option disabled value="">
+                  Degree
+                </option>
+                <option>Diploma</option>
+                <option>Bachelor</option>
+                <option>Masters</option>
+              </select>
+              {errors.degree && (
+                <p className="text-red-600">This Field is required</p>
+              )}
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Phone Number</span>
@@ -189,20 +266,14 @@ const CheckoutForm = ({ charge }) => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Gender</span>
+                <span className="label-text">Applicant Photo</span>
               </label>
-              <select
-                defaultValue={""}
-                {...register("gender", { required: true })}
-                className="select select-bordered w-full max-w-xs"
-              >
-                <option disabled value="">
-                  Gender
-                </option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-              {errors.gender && (
+              <input
+                type="file"
+                {...register("applicant_photo", { requred: true })}
+                className="input input-bordered "
+              />
+              {errors.applicant_photo && (
                 <p className="text-red-600">This Field is required</p>
               )}
             </div>
@@ -234,11 +305,30 @@ const CheckoutForm = ({ charge }) => {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Gender</span>
+              </label>
+              <select
+                defaultValue={""}
+                {...register("gender", { required: true })}
+                className="select select-bordered w-full max-w-xs"
+              >
+                <option disabled value="">
+                  Gender
+                </option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+              {errors.gender && (
+                <p className="text-red-600">This Field is required</p>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Sudy Gap (otional)</span>
               </label>
               <input
                 type="text"
-                {...register("applicants_village")}
+                {...register("study_gap")}
                 className="input input-bordered"
               />
             </div>
@@ -248,18 +338,18 @@ const CheckoutForm = ({ charge }) => {
               </label>
               <input
                 type="text"
-                {...register("applicants_village")}
+                {...register("university_name")}
                 className="input input-bordered"
                 readOnly
               />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Scholarship Degree</span>
+                <span className="label-text">Scholarship Category</span>
               </label>
               <input
                 type="text"
-                {...register("applicants_village")}
+                {...register("scholarship_category")}
                 className="input input-bordered"
                 readOnly
               />
@@ -270,41 +360,24 @@ const CheckoutForm = ({ charge }) => {
               </label>
               <input
                 type="text"
-                {...register("applicants_village")}
+                {...register("subject_category")}
                 className="input input-bordered"
                 readOnly
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Applying For</span>
-              </label>
-              <select
-                defaultValue={""}
-                {...register("degree", { required: true })}
-                className="select select-bordered w-full max-w-xs"
-              >
-                <option disabled value="">
-                  Degree
-                </option>
-                <option>Diploma</option>
-                <option>Bachelor</option>
-                <option>Masters</option>
-              </select>
-              {errors.degree && (
-                <p className="text-red-600">This Field is required</p>
-              )}
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+
+            <div className="form-control mt-6 col-span-2 items-center">
+              <button className="btn btn-primary btn-wide" type="submit">
+                Apply
+              </button>
             </div>
           </form>
-          <div className="modal-action justify-center ">
-            <form method="dialog">
-              {/* if there is a button, it will close the modal */}
-              <button className="btn btn-wide">Appply</button>
+          {/* <div className="modal-action justify-center ">
+            <form method="dialog"> */}
+          {/* if there is a button, it will close the modal */}
+          {/* <button className="btn btn-wide">Appply</button>
             </form>
-          </div>
+          </div> */}
         </div>
       </dialog>
     </div>

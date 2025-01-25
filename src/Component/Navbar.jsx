@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useAuth from "../Hook/useAuth";
 import Swal from "sweetalert2";
+import logo from '../assets/icons8-scholarship-64 (2).png'
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
@@ -59,7 +60,10 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
+        <div className="flex justify-center items-center">
+          <img src={logo} alt="" />
         <a className="btn btn-ghost text-xl">ScholarSphere</a>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>

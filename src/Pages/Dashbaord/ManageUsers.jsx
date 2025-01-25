@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import useCommonAxios from "../../Hook/useCommonAxios";
 import { TiUserDelete } from "react-icons/ti";
+import useUser from "../../Hook/useUser";
 
 const ManageUsers = () => {
-  const [users, setUsers] = useState([]);
   const axiosCommon = useCommonAxios();
-  useEffect(() => {
-    axiosCommon.get("/users").then((res) => {
-      console.log(res.data);
-      setUsers(res.data);
+  const [users, refetch] = useUser();
+
+  const handleDeleteUser = (id) => {
+    axiosCommon.delete(`/users/${id}`).then((res) => {
+      refetch();
     });
-  }, []);
-
-  //   const handleDelete = (id) =>{
-
-  //         axiosCommon.delete(`/users/${id}`)
-  //         .then(res => console.log(res.data   ))
-
-  //   }
+  };
   return (
     <div>
       <div className="overflow-x-auto">
@@ -40,8 +34,8 @@ const ManageUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className=" w-[20px]">
-                  <select class="">
-                    <option disabled selected>
+                  <select className="" defaultValue={""}>
+                    <option disabled value={""}>
                       {user.role ? user.role : "user"}
                     </option>
                     <option>Moderator</option>
@@ -50,7 +44,7 @@ const ManageUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user._id)}
+                    onClick={() => handleDeleteUser(user._id)}
                     className="btn"
                   >
                     <TiUserDelete className="text-2xl  mx-auto" />

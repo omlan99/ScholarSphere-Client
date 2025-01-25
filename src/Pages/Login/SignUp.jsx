@@ -77,7 +77,7 @@ const SignUp = () => {
                 {...register("name", { required: true })}
                 placeholder="Enter Your Name"
                 className="input input-bordered"
-                required
+                
               />
             </div>
             <div className="form-control">
@@ -89,7 +89,7 @@ const SignUp = () => {
                 {...register("email", { required: true })}
                 placeholder="email"
                 className="input input-bordered"
-                required
+                
               />
             </div>
             <div className="form-control">
@@ -101,7 +101,7 @@ const SignUp = () => {
                 {...register("photo", { required: true })}
                 placeholder="Enter link of a photo"
                 className="input input-bordered"
-                required
+                
               />
             </div>
             <div className="form-control">
@@ -113,7 +113,7 @@ const SignUp = () => {
                 {...register("password", { required: true })}
                 placeholder="password"
                 className="input input-bordered"
-                required
+                
               />
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">

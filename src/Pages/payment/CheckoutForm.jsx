@@ -20,9 +20,11 @@ const CheckoutForm = ({ charge }) => {
       setScholarShip(res.data);
     });
   }, [charge]);
-  console.log(scholarship);
-  const amount = scholarship;
-  console.log(amount);
+  console.log(scholarship.application_fees);
+  const amount = parseInt (scholarship.application_fees);
+  console.log(amount)
+  
+  console.log(typeof(amount));
   const {
     register,
     handleSubmit,
@@ -34,13 +36,15 @@ const CheckoutForm = ({ charge }) => {
     // },
   });
   useEffect(() => {
-    axiosCommon
+    if(typeof(amount) === "number" && amount > 0 ){
+      axiosCommon
       .post("/create-payment-intent", { price: amount })
       .then((res) => {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
-  }, [axiosCommon, charge]);
+    }
+  }, [axiosCommon, amount]);
 
   const handleSubmitforPayment = async (event) => {
     event.preventDefault();

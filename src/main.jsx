@@ -10,12 +10,14 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
+        <ToastContainer></ToastContainer>
         <HelmetProvider>
           <div className="max-w-screen-xl mx-auto">
             <RouterProvider router={router} />

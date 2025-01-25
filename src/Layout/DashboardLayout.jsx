@@ -23,10 +23,10 @@ const DashboardLayout = () => {
                     <Link to={'/dashboard/myprofile'}>My profile</Link>
                 </li>
                 <li>
-                    <Link>My Application</Link>
+                    <Link to={'/dashboard/myApplication'}>My Application</Link>
                 </li>
                 <li>
-                    <Link>My Review</Link>
+                    <Link to={'/dashboard/myReview'}>My Review</Link>
                 </li>
                 {/* </>) */}
             {/* } */}

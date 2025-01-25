@@ -14,6 +14,16 @@ const ManageUsers = () => {
   };
   return (
     <div>
+      <div className="w-full flex justify-end pr-20">
+        <select defaultValue={''} className="select select-bordered">
+          <option disabled value={''}>
+            Sort By
+          </option>
+          <option>Adnin</option>
+          <option>Moderator</option>
+          <option>User</option>
+        </select>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

@@ -29,7 +29,7 @@ const CheckoutForm = ({ charge }) => {
     });
   }, [charge]);
   useEffect(() => {
-    if (user?.email) {
+    if (user?.email) {  
       axiosCommon.get(`/users?email=${user.email}`).then((res) => {
         setUserData(res.data);
       });
@@ -54,7 +54,9 @@ const CheckoutForm = ({ charge }) => {
       service_charge : scholarship.service_charge,
       university_address : scholarship.university_city,
       scholarship_id : scholarship._id,
+      scholarship : scholarship.scholarship_name,
       applied_date: new Date().toISOString().split("T")[0],
+      email : user.email
     };
     console.log(applicationData);
     const imageFile = { image: data.applicant_photo[0] };
@@ -73,7 +75,7 @@ const CheckoutForm = ({ charge }) => {
       };
       console.log(dataWithImage)
       console.log(dataWithImage)
-      axiosCommon.post("/applications", dataWithImage).then((res) => {
+      axiosCommon.post(`/applications`, dataWithImage).then((res) => {
         console.log(res.data);
         Swal.fire({
           position: "center",
@@ -178,12 +180,12 @@ const CheckoutForm = ({ charge }) => {
         </button>
       </form>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
-      <button
+      {/* <button
         className="btn"
         onClick={() => document.getElementById("my_modal_4").showModal()}
       >
         Applicant Form
-      </button>
+      </button> */}
       <dialog id="my_modal_4" className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
           <h3 className="font-bold text-lg">Applicant Form</h3>

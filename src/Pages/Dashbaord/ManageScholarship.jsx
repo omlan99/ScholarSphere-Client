@@ -4,6 +4,7 @@ import { FcViewDetails } from "react-icons/fc";
 import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import useScholarship from "../../Hook/useScholarship";
+import { Link } from "react-router-dom";
 
 const ManageScholarship = () => {
   const axiosCommon = useCommonAxios();

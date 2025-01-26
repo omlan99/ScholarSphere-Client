@@ -15,6 +15,7 @@ import AddScholarship from "../Pages/Dashbaord/AddScholarship";
 import MyApplication from "../Pages/Dashbaord/Users/MyApplication";
 import MyReview from "../Pages/Dashbaord/Users/MyReview";
 import AppliedScholarship from "../Pages/Dashbaord/AppliedScholarship";
+import AllReview from "../Pages/Dashbaord/AllReview";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path : "allApplication",
         element : <AppliedScholarship></AppliedScholarship>
+      },
+      {
+        path : 'allReviews',
+        element : <AllReview></AllReview>
       },
       {
         path: "payment/:charge",

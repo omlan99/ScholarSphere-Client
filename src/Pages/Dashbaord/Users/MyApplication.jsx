@@ -61,6 +61,7 @@ const MyApplication = () => {
     const additionalData = {
       scholarship_name: scholarship.scholarship_name,
       university_name: scholarship.university_name,
+      subject_category : scholarship.subject_category,
       name: user.displayName,
       image: user.photoURL,
       email: user.email,
@@ -78,7 +79,6 @@ const MyApplication = () => {
 
   const handleReview = (id) => {
     document.getElementById("my_modal_3").showModal()
-    console.log("hello world", id);
     axiosCommon.get(`/scholarship/${id}`)
     .then(res => {
       console.log(res.data)

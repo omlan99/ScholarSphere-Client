@@ -8,7 +8,7 @@ const Home = () => {
       <Helmet>
         <title>ScholarSphere | Home</title>
       </Helmet>
-      <ReviewCard></ReviewCard>
+
       Home is here
     </div>
   );

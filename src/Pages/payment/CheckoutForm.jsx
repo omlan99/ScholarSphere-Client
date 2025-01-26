@@ -29,7 +29,7 @@ const CheckoutForm = ({ charge }) => {
     });
   }, [charge]);
   useEffect(() => {
-    if (user?.email) {  
+    if (user?.email) {
       axiosCommon.get(`/users?email=${user.email}`).then((res) => {
         setUserData(res.data);
       });

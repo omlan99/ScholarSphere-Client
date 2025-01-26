@@ -39,7 +39,7 @@ const DashboardLayout = () => {
                     <Link to={'/dashboard/manageScholarship'}>Manage Scholarship</Link>
                 </li>
                 <li>
-                    <Link>All Reviews</Link>
+                    <Link to={'allReviews'}>All Reviews</Link>
                 </li>
                 <li>
                     <Link to={"/dashboard/allApplication"}>All applied Scholarship</Link>
@@ -67,7 +67,7 @@ const DashboardLayout = () => {
                     <Link to="/dashboard/manageUsers">Manage Users.</Link>
                 </li>
                 <li>
-                    <Link>Manage Review</Link>
+                    <Link to="allReviews">Manage Review</Link>
                 </li>
                 {/* </>) */}
             {/* } */}

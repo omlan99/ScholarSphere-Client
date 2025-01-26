@@ -35,8 +35,7 @@ const CheckoutForm = ({ charge }) => {
       });
     }
   }, []);
-  const postingData = { userId: userData._id, ...userData };
-  console.log(postingData);
+ 
   const amount = parseInt(scholarship.application_fees);
 
   const {
@@ -45,21 +44,21 @@ const CheckoutForm = ({ charge }) => {
     formState: { errors },
     reset,
   } = useForm({
-    defaultValues: {
-      // posted_date: new Date().toISOString().split("T")[0], // Set today's date in YYYY-MM-DD format
-      university_name: scholarship.university_name,
-      scholarship_category: scholarship.scholarship_category,
-      subject_category: scholarship.subject_category,
-    },
+   
   });
   const onSubmit = async (data) => {
     const applicationData = {
       ...data,
-      ...postingData,
+      ...userData,
+      scholarship_fees : scholarship.application_fees,
+      service_charge : scholarship.service_charge,
+      university_address : scholarship.university_city,
+      scholarship_id : scholarship._id,
       applied_date: new Date().toISOString().split("T")[0],
     };
     console.log(applicationData);
     const imageFile = { image: data.applicant_photo[0] };
+    console.log(imageFile)
 
     const images = await axiosCommon.post(image_hosting_api, imageFile, {
       headers: {
@@ -72,6 +71,8 @@ const CheckoutForm = ({ charge }) => {
         ...applicationData,
         applicant_photo: images.data.data.display_url,
       };
+      console.log(dataWithImage)
+      console.log(dataWithImage)
       axiosCommon.post("/applications", dataWithImage).then((res) => {
         console.log(res.data);
         Swal.fire({

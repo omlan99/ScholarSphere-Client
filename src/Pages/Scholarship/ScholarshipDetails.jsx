@@ -15,26 +15,6 @@ const ScholarshipDetails = () => {
   console.log(scholarship);
   console.log(id);
 
-  // application_deadline
-  // :
-  // "2025-04-15"
-  // application_fees
-  // :
-  // 80
-  // degree
-  // :
-  // "Masters"
-  // scholarship_category
-  // :
-  // "Partial"
-  // scholarship_name
-  // :
-  // "Environmental Sustainability Scholarship"
-  // service_charge
-  // :
-  // 30
-
-  // tuition_fees
 
   return (
     <div>

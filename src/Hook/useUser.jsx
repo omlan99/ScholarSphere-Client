@@ -13,7 +13,7 @@ const useUser = () => {
     },
   });
 
-  return [users, user?.email, refetch];
+  return [users, refetch];
 };
 
 export default useUser;

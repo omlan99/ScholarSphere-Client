@@ -57,7 +57,7 @@ const CheckoutForm = ({ charge }) => {
       scholarship : scholarship.scholarship_name,
       applied_date: new Date().toISOString().split("T")[0],
       email : user.email,
-      role : ""
+      status : 'pending'
     };
     console.log(applicationData);
     const imageFile = { image: data.applicant_photo[0] };

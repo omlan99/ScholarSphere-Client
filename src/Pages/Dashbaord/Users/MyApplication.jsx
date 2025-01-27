@@ -130,7 +130,7 @@ const MyApplication = () => {
                 <td>{application.degree}</td>
                 <td>{application.scholarship_fees}</td>
                 <td>{application.service_charge}</td>
-                <td></td>
+                <td>{application?.status}</td>
                 <td>
                   <button onClick={() => handleReview(application.scholarship_id)}>
                     <MdReviews className="text-2xl  mx-auto" />

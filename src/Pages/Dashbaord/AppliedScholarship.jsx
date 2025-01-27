@@ -5,6 +5,7 @@ import { TiDelete } from "react-icons/ti";
 import { FcViewDetails } from "react-icons/fc";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { VscFeedback } from "react-icons/vsc";
+import Swal from "sweetalert2";
 
 const AppliedScholarship = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,10 +29,31 @@ const AppliedScholarship = () => {
     document.getElementById("my_modal_1").showModal()
    }
 
-   const handleDelete = (id) => {
-    axiosSecure.delete(`applications/${id}`,)
-    .then(res => console.log(res.data))
-    setApplications(applications.filter(application => application._id !== id))
+   const handleCancel = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to Cancel application!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Cancel it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal .fire({
+          title: "Canceled!",
+          text: "Application has been Canceled.",
+          icon: "success",
+        });
+        const updateData = {
+          status : "canceled"
+         }
+         axiosSecure.patch(`/application/${id}`, updateData)
+         .then(res => console.log(res.data))
+      }
+    });
+ 
+   
 
    }
   return (
@@ -76,7 +98,7 @@ const AppliedScholarship = () => {
                 <td>
                   <TiDelete
                     className="text-2xl  mx-auto cursor-pointer"
-                    onClick={() => handleDelete(application._id)}
+                    onClick={() => handleCancel(application._id)}
                   />
                 </td>
               </tr>

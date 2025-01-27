@@ -3,11 +3,13 @@ import SectionTitle from "../../Component/SectionTitle";
 import useAuth from "../../Hook/useAuth";
 import useCommonAxios from "../../Hook/useCommonAxios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 const image_hosting_key = import.meta.env.VITE_image_key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddScholarship = () => {
   const { user } = useAuth();
-  const axiosCommon = useCommonAxios();
+  // const axiosCommon = useCommonAxios();
+  const axiosSecure = useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -48,7 +50,7 @@ const AddScholarship = () => {
         role: user?.role || "",
       };
       console.log(scholarshipData);
-      axiosCommon.post("/scholarship", scholarshipData).then((res) => {
+      axiosSecure.post("/scholarship", scholarshipData).then((res) => {
         Swal.fire({
           position: "center",
           icon: "success",

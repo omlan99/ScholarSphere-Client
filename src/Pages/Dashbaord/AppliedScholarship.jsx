@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionTitle from "../../Component/SectionTitle";
 import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { FcViewDetails } from "react-icons/fc";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import { VscFeedback } from "react-icons/vsc";
 
 const AppliedScholarship = () => {
-  const handleDetails = () => {
+  const axiosSecure = useAxiosSecure();
+  const [applications, setApplications] = useState([]);
+  const [displayApplication, setDisplayApplication] = useState([]);
+  useEffect(() => {
+    axiosSecure.get("/applications").then((res) => {
+      console.log(res.data);
+      setApplications(res.data);
+    });
+  }, []);
+
+  const handleDetails = (id) => {
     document.getElementById("my_modal_3").showModal();
+    axiosSecure.get(`applications/${id}`).then((res) => {
+      console.log(res.data);
+      setDisplayApplication(res.data);
+    });
   };
+   const handleFeedback = () => {
+    document.getElementById("my_modal_1").showModal()
+   }
+
+   const handleDelete = (id) => {
+    axiosSecure.delete(`applications/${id}`,)
+    .then(res => console.log(res.data))
+    setApplications(applications.filter(application => application._id !== id))
+
+   }
   return (
     <div>
-      <SectionTitle heading={"My Reviews"}></SectionTitle>
+      <SectionTitle heading={"All Applications"}></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table text-center">
           {/* head */}
@@ -27,51 +53,44 @@ const AppliedScholarship = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {/* {
-                          scholarships.map((scholarship, index) =>   <tr key={index}>
-                            <th>{index+1}</th>
-                            <td>{scholarship.university_name}</td>
-                            <td>{scholarship.subject_name
-                            }</td>
-                            <td>{scholarship.scholarship_category}</td>
-                            <td></td>
-                            <td>{scholarship.application_fees}</td>
-                            <td><FcViewDetails className='text-2xl'></FcViewDetails></td>
-                            <td><FaRegEdit className='text-2xl'></FaRegEdit></td>
-                            <td><TiDelete className='text-2xl' onClick={() => handleDelete(scholarship._id)} /></td>
-                          </tr>)
-                        } */}
+            {applications.map((application, index) => (
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <div className="avatar">
+                  <div className="mask mask-squircle h-12 w-12">
+                    <img src={application.applicant_photo} alt="" />
+                  </div>
+                </div>
 
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>{" "}
-              <td>
-                <button>
+                <td>{application.name}</td>
+                <td>{application.application_fees}</td>
+                <td>
                   <FcViewDetails
-                    onClick={handleDetails}
-                    className="text-2xl mx-auto"
+                    onClick={() => handleDetails(application._id)}
+                    className="text-2xl  mx-auto cursor-pointer"
                   ></FcViewDetails>
-                </button>
-              </td>
-              <td>
-                <FaRegEdit className="text-2xl mx-auto"></FaRegEdit>
-              </td>
-              <td>
-                <TiDelete className="text-2xl mx-auto" />
-              </td>
-            </tr>
+                </td>
+                <td>
+                  <VscFeedback onClick={handleFeedback} className="text-2xl  mx-auto cursor-pointer" />
+                </td>
+                <td>
+                  <TiDelete
+                    className="text-2xl  mx-auto cursor-pointer"
+                    onClick={() => handleDelete(application._id)}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
-      <button
+      {/* <button
         className="btn"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         Applicant Form
-      </button>
+      </button> */}
 
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box w-3/6 max-w-5xl">
@@ -81,33 +100,51 @@ const AppliedScholarship = () => {
               ✕
             </button>
           </form>
-          <form>
-            <div>
-              <p className="py-5">
-                <span className="font-semibold ">
-                  {" "}
-                  Applied university name :
-                </span>
-              </p>
-              <p className="py-5">
-                <span className="font-semibold "> Applied Degree :</span>
-              </p>
-              <p className="py-5">
-                <span className="font-semibold ">
-                  {" "}
-                  Applied Scholarship Category :
-                </span>
-              </p>
-            </div>
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              <button
-                type="button"
-                className="btn text-sm/6 font-semibold text-gray-900"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+
+          <div>
+            <p className="py-5">
+              <span className="font-semibold ">
+                {" "}
+                Applied university name : {displayApplication.university_name}
+              </span>
+            </p>
+            <p className="py-5">
+              <span className="font-semibold ">
+                {" "}
+                Applied Degree : {displayApplication.degree}
+              </span>
+            </p>
+            <p className="py-5">
+              <span className="font-semibold ">
+                {" "}
+                Applied Scholarship Category :{" "}
+                {displayApplication.subject_category}
+              </span>
+            </p>
+          </div>
+        </div>
+      </dialog>
+
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      {/* <button
+        className="btn"
+        onClick={() => document.getElementById("my_modal_1").showModal()}
+      >
+        open modal
+      </button> */}
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center pb-5">Give Your Feedback!</h3>
+          <div className="w-full flex justify-center">
+          <input  type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
         </div>
       </dialog>
     </div>

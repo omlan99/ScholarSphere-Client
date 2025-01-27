@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
 import ToggleBtn from "../../Component/ToggleBtn";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { signInUser } = useAuth();
@@ -27,7 +28,7 @@ const Login = () => {
       });
       navigate("/");
     });
-
+    
   };
 
   return (

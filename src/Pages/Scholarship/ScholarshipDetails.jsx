@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import HelmetCompo from "../../Component/HelmetCompo";
 import { Link, useParams } from "react-router-dom";
 import useCommonAxios from "../../Hook/useCommonAxios";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const ScholarshipDetails = () => {
   const { id } = useParams();
   const [scholarship, setScholarShip] = useState({});
-  const axiosCommon = useCommonAxios();
+  // const axiosCommon = useCommonAxios();
+  const axiosSecure = useAxiosSecure()
   useEffect(() => {
-    axiosCommon.get(`/scholarship/${id}`).then((res) => {
+    axiosSecure.get(`/scholarship/${id}`).then((res) => {
       setScholarShip(res.data);
     });
   }, []);

@@ -9,10 +9,22 @@ const ManageUsers = () => {
   const [users, refetch] = useUser();
 
   const handleDeleteUser = (id) => {
-    axiosSecure.delete(`/users/${id}`).then((res) => {
-      refetch();
-    });
+    if(users.length > 0){
+      axiosSecure.delete(`/users/${id}`).then((res) => {
+        refetch();
+      });
+    }
   };
+  const handleRole = ( e, id) => {
+    console.log( e.target.value , id)
+    const updateData = {
+      role : e.target.value
+    }
+  
+    axiosSecure.patch(`/users/role/${id}`, updateData)
+    .then(res => console.log(res.data))
+
+  }
   return (
     <div>
       <div className="w-full flex justify-end pr-20">
@@ -39,13 +51,13 @@ const ManageUsers = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {users.map((user, index) => (
+            {users.length>0 ? (users.map((user, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className=" w-[20px]">
-                  <select className="" defaultValue={""}>
+                  <select className="" defaultValue={""} onChange={(e) => handleRole(e, user._id)}>
                     <option disabled value={""}>
                       {user.role ? user.role : "user"}
                     </option>
@@ -62,7 +74,7 @@ const ManageUsers = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))) : <></>}
           </tbody>
         </table>
       </div>

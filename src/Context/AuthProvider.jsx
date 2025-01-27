@@ -63,6 +63,7 @@ const AuthProvider = ({ children }) => {
     };
   }, [axiosSecure]);
   const updateUser = (name, photo) => {
+    setLoader(true)
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,

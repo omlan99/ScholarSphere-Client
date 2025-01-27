@@ -56,7 +56,8 @@ const CheckoutForm = ({ charge }) => {
       scholarship_id : scholarship._id,
       scholarship : scholarship.scholarship_name,
       applied_date: new Date().toISOString().split("T")[0],
-      email : user.email
+      email : user.email,
+      role : ""
     };
     console.log(applicationData);
     const imageFile = { image: data.applicant_photo[0] };

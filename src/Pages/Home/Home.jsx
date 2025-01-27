@@ -1,6 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import ReviewCard from "../../Component/ReviewCard";
+import Apply from "./Apply";
+import BannerSlider from "./BannerSlider";
 
 const Home = () => {
   return (
@@ -8,8 +10,9 @@ const Home = () => {
       <Helmet>
         <title>ScholarSphere | Home</title>
       </Helmet>
-
-      Home is here
+      <BannerSlider></BannerSlider>
+        <Apply></Apply>
+     
     </div>
   );
 };

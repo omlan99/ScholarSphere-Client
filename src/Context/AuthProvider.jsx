@@ -19,8 +19,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
-  const axiosCommon = useCommonAxios();
-
+  const axiosCommon = useCommonAxios()
   const createUser = (email, password) => {
     setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -37,7 +36,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-      console.log(loggedUser);
+      // console.log(loggedUser);
       setUser(loggedUser);
       if (loggedUser) {
         const userInfo = {
@@ -47,8 +46,8 @@ const AuthProvider = ({ children }) => {
         axiosCommon.post('/jwt',userInfo)
         .then(res => {
           console.log(res)
-          if(res.data){
-            localStorage.setItem('access-token', res.data)
+          if(res.data.token){
+            localStorage.setItem('access-token', res.data.token)
           }
 
         })

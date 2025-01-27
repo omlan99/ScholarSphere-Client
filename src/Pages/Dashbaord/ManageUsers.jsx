@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import useCommonAxios from "../../Hook/useCommonAxios";
 import { TiUserDelete } from "react-icons/ti";
 import useUser from "../../Hook/useUser";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const ManageUsers = () => {
-  const axiosCommon = useCommonAxios();
+  const axiosSecure = useAxiosSecure();
   const [users, refetch] = useUser();
 
   const handleDeleteUser = (id) => {
-    axiosCommon.delete(`/users/${id}`).then((res) => {
+    axiosSecure.delete(`/users/${id}`).then((res) => {
       refetch();
     });
   };

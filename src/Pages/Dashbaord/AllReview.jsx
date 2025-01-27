@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import SectionTitle from "../../Component/SectionTitle";
 import useCommonAxios from "../../Hook/useCommonAxios";
 import ReviewCard from "../../Component/ReviewCard";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const AllReview = () => {
-  const axiosCommon = useCommonAxios();
+  const axiosSecure = useAxiosSecure();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    axiosCommon.get("/reviews").then((res) => {
+    axiosSecure.get("/reviews").then((res) => {
       console.log(res.data);
       setReviews(res.data);
     });

@@ -2,10 +2,21 @@ import { Link } from "react-router-dom";
 import useAuth from "../Hook/useAuth";
 import Swal from "sweetalert2";
 import logo from '../assets/icons8-scholarship-64 (2).png'
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
-  // console.log(user)
+  const axiosSecure = useAxiosSecure()
+  const [users , setUsers] = useState({})
+  console.log(user?.email)
+  useEffect(() =>{
+    axiosSecure.get(`/users/${user?.email}`)
+    .then(res => {
+      console.log(users)
+      setUsers(res.data)
+    })
+  }, [user?.email, axiosSecure])
   const navOptions = (
     <>
     <li>
@@ -14,9 +25,9 @@ const Navbar = () => {
       <li>
       <Link to={'/AllScholarship'}>All Scholarship</Link>
       </li>
-      {user && !user.role === 'user' && (<li><Link to={"dashboard/myprofile"}>User Dashboard</Link></li>) }
-      {user?.role === 'admin' &&   ( <li><Link to={"dashboard/myprofile"}>Admin Dashboard</Link></li>)}
-      {user?.role === 'moderator' && (<li><Link to={"dashboard/myprofile"}>Moderator Dashboard</Link></li>)}
+      {users?.role === 'user' && (<li><Link to={"dashboard/myprofile"}>User Dashboard</Link></li>) }
+      {users?.role === 'admin' &&   ( <li><Link to={"dashboard/myprofile"}>Admin Dashboard</Link></li>)}
+      {users?.role === 'moderator' && (<li><Link to={"dashboard/myprofile"}>Moderator Dashboard</Link></li>)}
     </>
   );
 

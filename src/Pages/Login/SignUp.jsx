@@ -27,6 +27,7 @@ const SignUp = () => {
             name: data.name,
             email: data.email,
             image: data.photo,
+            role : "user"
           };
           // console.log(userInfo);
           axiosCommon

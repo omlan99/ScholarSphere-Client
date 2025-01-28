@@ -17,7 +17,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    signInUser(data.email, data.password).then((result) => {
+    signInUser(data.email, data.password)
+    .then((result) => {
       // console.log(result.user);
       Swal.fire({
         position: "top-end",
@@ -27,7 +28,10 @@ const Login = () => {
         timer: 1500,
       });
       navigate("/");
-    });
+    })
+    .catch((error) =>{
+      toast.error(`${error.message}`)
+    })
     
   };
 

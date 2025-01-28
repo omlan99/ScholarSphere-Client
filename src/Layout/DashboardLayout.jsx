@@ -17,8 +17,8 @@ const DashboardLayout = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {/* Sidebar content here */}
 
-            {/* { */}
-                {/* user && !user.role && (<> */}
+            {
+                user && !user.role && (<>
                 <li>
                     <Link to={'/dashboard/myprofile'}>My profile</Link>
                 </li>
@@ -28,10 +28,10 @@ const DashboardLayout = () => {
                 <li>
                     <Link to={'/dashboard/myReview'}>My Review</Link>
                 </li>
-                {/* </>) */}
-            {/* } */}
-            {/* { */}
-                {/* user?.role === 'moderator' && (<> */}
+                </>)
+            }
+            {
+                user?.role === 'moderator' && (<>
                 <li>
                     <Link to={'/dashboard/myprofile'}>My Profile</Link>
                 </li>
@@ -47,10 +47,10 @@ const DashboardLayout = () => {
                 <li>
                     <Link to={'/dashboard/addScholarship'}>Add Scholarship</Link>
                 </li>
-                {/* </>)  */}
-            {/* } */}
-            {/* { */}
-                {/* user?.role === 'admin' && (<> */}
+                </>) 
+            }
+            {
+                user?.role === 'admin' && (<>
                 <li>
                     <Link to={'/dashboard/myprofile'}>Admin Profile.</Link>
                 </li>
@@ -69,8 +69,8 @@ const DashboardLayout = () => {
                 <li>
                     <Link to="allReviews">Manage Review</Link>
                 </li>
-                {/* </>) */}
-            {/* } */}
+                </>)
+            }
           
           </ul>
         </div>

@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useCommonAxios from "./useCommonAxios";
 import useAuth from "./useAuth";
-import { useQuery } from "@tanstack/react-query";
-
-
 
 const useScholarship = (find) => {
-    const {user} = useAuth()
-    const axiosCommon = useCommonAxios()  
-    // console.log(find)
+  const { user } = useAuth();
+  const axiosCommon = useCommonAxios();
 
-    const {refetch , data: scholarshipData=[], isLoading } =useQuery({
-        queryKey : ['scholarshipData', find, user?.email],
-        queryFn : async () =>{
-            const res = await axiosCommon.get(`/scholarship?search=${find}&email=${user?.email}`)
-                return res.data
-                
-        },
-        enabled: !!find || find === "",
-    })
+  const { refetch, data: scholarshipData = [], isLoading } = useQuery({
+    queryKey: ["scholarshipData", find, user?.email],
+    queryFn: async () => {
+      // Construct the query string dynamically
+      const emailQuery = user?.email ? `email=${user.email}` : "";
+      const searchQuery = find ? `search=${find}` : "";
+      const queryString = [emailQuery, searchQuery].filter(Boolean).join("&");
 
-    return [scholarshipData, refetch, isLoading]
+      const res = await axiosCommon.get(`/scholarship${queryString ? `?${queryString}` : ""}`);
+      return res.data;
+    },
+    enabled: !!find || !!user?.email, // Only fetch if find or email is present
+  });
+
+  return [scholarshipData, refetch, isLoading];
 };
 
 export default useScholarship;

@@ -16,6 +16,7 @@ import MyApplication from "../Pages/Dashbaord/Users/MyApplication";
 import MyReview from "../Pages/Dashbaord/Users/MyReview";
 import AppliedScholarship from "../Pages/Dashbaord/AppliedScholarship";
 import AllReview from "../Pages/Dashbaord/AllReview";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/scholarshipDetails/:id",
-        element: <ScholarshipDetails></ScholarshipDetails>,
+        element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
       },
 
       {
@@ -52,35 +53,35 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "myprofile",
-        element: <MyProfile></MyProfile>,
+        element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>,
       },
       {
         path: "manageScholarship",
-        element: <ManageScholarship></ManageScholarship>,
+        element: <PrivateRoute><ManageScholarship></ManageScholarship></PrivateRoute>,
       },
       {
         path: "manageUsers",
-        element: <ManageUsers></ManageUsers>,
+        element: <PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>,
       },
       {
         path: "addScholarship",
-        element: <AddScholarship></AddScholarship>,
+        element: <PrivateRoute><AddScholarship></AddScholarship></PrivateRoute>,
       },
       {
         path: "myApplication",
-        element: <MyApplication></MyApplication>,
+        element: <PrivateRoute><MyApplication></MyApplication></PrivateRoute>,
       },
       {
         path: "myReview",
-        element: <MyReview></MyReview>,
+        element: <PrivateRoute><MyReview></MyReview></PrivateRoute>,
       },
       {
         path : "allApplication",
-        element : <AppliedScholarship></AppliedScholarship>
+        element : <PrivateRoute><AppliedScholarship></AppliedScholarship></PrivateRoute>
       },
       {
         path : 'allReviews',
-        element : <AllReview></AllReview>
+        element : <PrivateRoute><AllReview></AllReview></PrivateRoute>
       },
       {
         path: "payment/:charge",

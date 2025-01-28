@@ -14,8 +14,8 @@ const ScholarshipDetails = () => {
       setScholarShip(res.data);
     });
   }, []);
-  console.log(scholarship);
-  console.log(id);
+  // console.log(scholarship);
+  // console.log(id);
 
 
   return (

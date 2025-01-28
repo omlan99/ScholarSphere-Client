@@ -7,13 +7,16 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { VscFeedback } from "react-icons/vsc";
 import Swal from "sweetalert2";
 
+
 const AppliedScholarship = () => {
   const axiosSecure = useAxiosSecure();
   const [applications, setApplications] = useState([]);
   const [displayApplication, setDisplayApplication] = useState([]);
+  const [feedback, setFeedback] = useState("")
+  const [feedbackId, setFeedBackId] = useState('')
   useEffect(() => {
     axiosSecure.get("/applications").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setApplications(res.data);
     });
   }, []);
@@ -21,15 +24,24 @@ const AppliedScholarship = () => {
   const handleDetails = (id) => {
     document.getElementById("my_modal_3").showModal();
     axiosSecure.get(`applications/${id}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setDisplayApplication(res.data);
     });
   };
-   const handleFeedback = () => {
-    document.getElementById("my_modal_1").showModal()
-   }
+  const handleFeedback = (id) => {
+    document.getElementById('my_modal_1').showModal()
+    setFeedBackId(id)
+      
+  };
+  const submitReview = () =>{
+    const updateData = {
+      feedback : feedback
+    }
+    axiosSecure.patch(`/applications/${feedbackId}`, updateData)
+    .then(res => console.log(res.data))
+  }
 
-   const handleCancel = (id) => {
+  const handleCancel = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You want to Cancel application!",
@@ -40,22 +52,20 @@ const AppliedScholarship = () => {
       confirmButtonText: "Yes, Cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal .fire({
+        Swal.fire({
           title: "Canceled!",
           text: "Application has been Canceled.",
           icon: "success",
         });
         const updateData = {
-          status : "canceled"
-         }
-         axiosSecure.patch(`/application/${id}`, updateData)
-         .then(res => console.log(res.data))
+          status: "canceled",
+        };
+        axiosSecure
+          .patch(`/application/${id}`, updateData)
+          .then((res) => console.log(res.data));
       }
     });
- 
-   
-
-   }
+  };
   return (
     <div>
       <SectionTitle heading={"All Applications"}></SectionTitle>
@@ -93,7 +103,10 @@ const AppliedScholarship = () => {
                   ></FcViewDetails>
                 </td>
                 <td>
-                  <VscFeedback onClick={handleFeedback} className="text-2xl  mx-auto cursor-pointer" />
+                  <VscFeedback
+                    onClick={() =>handleFeedback(application._id)}
+                    className="text-2xl  mx-auto cursor-pointer"
+                  />
                 </td>
                 <td>
                   <TiDelete
@@ -147,28 +160,32 @@ const AppliedScholarship = () => {
         </div>
       </dialog>
 
+    
+      
+     
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {/* <button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_1").showModal()}
-      >
-        open modal
-      </button> */}
-      <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg text-center pb-5">Give Your Feedback!</h3>
+{/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button> */}
+<dialog id="my_modal_1" className="modal">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg text-center mb-4">Give Review!</h3>
           <div className="w-full flex justify-center">
-          <input  type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-
-          </div>
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
+          value = {feedback}
+          onChange={(e) =>setFeedback(e.target.value)}
+        />
+      </div>
+    <div className="modal-action">
+      <form method="dialog">
+        {/* if there is a button in form, it will close the modal */}
+        <button onClick={submitReview} className="btn">Close</button>
+      </form>
+     
+    </div>
+  </div>
+</dialog>
     </div>
   );
 };

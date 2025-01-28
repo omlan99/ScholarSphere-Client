@@ -10,7 +10,7 @@ const AllReview = () => {
 
   useEffect(() => {
     axiosSecure.get("/reviews").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setReviews(res.data);
     });
   }, []);
@@ -20,7 +20,7 @@ const AllReview = () => {
       .delete(`/reviews/${reviewId}`)
       .then((response) => {
         setReviews(reviews.filter((review) => review._id !== reviewId)); // Update local state
-        console.log("Review deleted successfully");
+        // console.log("Review deleted successfully");
       })
       .catch((error) => {
         console.error("Error deleting review:", error);

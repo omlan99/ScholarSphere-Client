@@ -9,11 +9,11 @@ import { Link } from "react-router-dom";
 const ManageScholarship = () => {
   const axiosCommon = useCommonAxios();
   const [scholarships, refetch] = useScholarship("");
-  console.log(scholarships);
+  // console.log(scholarships);
   const handleDelete = (id) => {
     axiosCommon.delete(`/scholarship/${id}`).then((res) => {
       if (res.data.deletedCount) {
-        console.log(res.data);
+        // console.log(res.data);
         refetch();
       }
     });

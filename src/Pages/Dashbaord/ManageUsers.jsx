@@ -9,6 +9,8 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [users, refetch] = useUser();
   const [filteredUsers, setFilteredUsers] = useState([])
+  const [selectedRolee, setSelectedRole] = useState('')
+  
   const handleDeleteUser = (id) => {
     if(users.length > 0){
       axiosSecure.delete(`/users/${id}`).then((res) => {
@@ -17,7 +19,6 @@ const ManageUsers = () => {
     }
   };
   const handleRole = ( e, id) => {
-    console.log( e.target.value , id)
      Swal.fire({
           title: "Are you sure?",
           text: `You want to make him/her ${e.target.value}!`,
@@ -38,23 +39,45 @@ const ManageUsers = () => {
             }
           
             axiosSecure.patch(`/users/role/${id}`, updateData)
-            .then(res => console.log(res.data))
-        
+            .then(res =>{
+              
+              console.log(res.data)
+              if (res.data.modifiedCount > 0) {
+                // Update users state locally
+                const updatedUsers = users.map((user) =>
+                  user._id === id ? { ...user, role: e.target.value } : user
+                );
+                refetch(); // Optional, to ensure consistency with the backend
+                const filtered = updatedUsers.filter(user => user.role === selectedRolee)
+                setFilteredUsers(filtered);
+                Swal.fire(
+                  "Updated!",
+                  // `User role updated to ${newRole}.`,
+                  "success"
+                );
+              }
+            })
+            
            
           }
         });
    
   }
   useEffect(() => {
-    setFilteredUsers(users);
-  }, [users]);
+    if (users && !selectedRolee) {
+      setFilteredUsers(users); // Set filtered users when `users` is fetched
+    }
+  }, [users, selectedRolee]);
   const handleFilter = (selectedRole) =>{
-    console.log(selectedRole)
+      setSelectedRole(selectedRole)
       if(!selectedRole){
         setFilteredUsers(users)
       }
-      const filtered = users.filter(user => user.role === selectedRole)
+      else{
+        const filtered = users.filter(user => user.role === selectedRole)
+        console.log(filtered)
       setFilteredUsers(filtered)
+      }
       
 
   }
@@ -90,14 +113,16 @@ const ManageUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className=" w-[20px]">
-                  <select defaultValue={user.role} onChange={(e) => handleRole(e, user._id)}>
+                  <select onChange={(e) => handleRole(e, user._id)}>
                   
-                  
-                    <option value={'user'}>User</option>
-                    <option value={'moderator'}>Moderator</option>
-                    <option value={'admin'}>Admin</option>
+
+                    <option >User</option>
+                    <option  >Moderator</option>
+                    <option  >Admin</option>
+                    
                   </select>
                 </td>
+                <td>{user.role}</td>
                 <td>
                   <button
                     onClick={() => handleDeleteUser(user._id)}

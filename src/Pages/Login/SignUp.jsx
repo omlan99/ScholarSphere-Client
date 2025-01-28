@@ -19,7 +19,7 @@ const SignUp = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         updateUser(data.name, data.photo).then(() => {
@@ -28,7 +28,7 @@ const SignUp = () => {
             email: data.email,
             image: data.photo,
           };
-          console.log(userInfo);
+          // console.log(userInfo);
           axiosCommon
             .post("/users", userInfo)
             .then((res) => {

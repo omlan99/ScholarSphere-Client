@@ -18,7 +18,7 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     signInUser(data.email, data.password).then((result) => {
-      console.log(result.user);
+      // console.log(result.user);
       Swal.fire({
         position: "top-end",
         icon: "success",

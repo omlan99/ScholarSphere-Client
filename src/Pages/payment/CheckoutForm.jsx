@@ -5,6 +5,7 @@ import useAuth from "../../Hook/useAuth";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 const image_hosting_key = import.meta.env.VITE_image_key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CheckoutForm = ({ charge }) => {
@@ -15,11 +16,13 @@ const CheckoutForm = ({ charge }) => {
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const axiosCommon = useCommonAxios();
+  const axiosSecure=useAxiosSecure()
   const [scholarship, setScholarShip] = useState({});
   const [userData, setUserData] = useState([]);
   const [applied, setApplied] = useState(false);
-  useEffect(() => {
-    axiosCommon.get(`/scholarship/${charge}`).then((res) => {
+  useEffect(() => { 
+    axiosSecure.get(`/scholarship/${charge}`).then((res) => {
+ 
       setScholarShip(res.data);
       reset({
         university_name: res.data.university_name,
@@ -59,9 +62,9 @@ const CheckoutForm = ({ charge }) => {
       email : user.email,
       status : 'pending'
     };
-    console.log(applicationData);
+    
     const imageFile = { image: data.applicant_photo[0] };
-    console.log(imageFile)
+  
 
     const images = await axiosCommon.post(image_hosting_api, imageFile, {
       headers: {
@@ -74,10 +77,9 @@ const CheckoutForm = ({ charge }) => {
         ...applicationData,
         applicant_photo: images.data.data.display_url,
       };
-      console.log(dataWithImage)
-      console.log(dataWithImage)
+
       axiosCommon.post(`/applications`, dataWithImage).then((res) => {
-        console.log(res.data);
+        
         Swal.fire({
           position: "center",
           icon: "success",
@@ -97,7 +99,7 @@ const CheckoutForm = ({ charge }) => {
       axiosCommon
         .post("/create-payment-intent", { price: amount })
         .then((res) => {
-          console.log(res.data.clientSecret);
+          // console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -119,11 +121,11 @@ const CheckoutForm = ({ charge }) => {
       card,
     });
     if (error) {
-      console.log("payment error", error);
+      // console.log("payment error", error);
       setError(error.message);
       toast.error(`${error.message}`, { position: "top-center" });
     } else {
-      console.log("payment method", paymentMethod);
+      // console.log("payment method", paymentMethod);
       setError("");
     }
     const { paymentIntent, error: confirmError } =
@@ -137,11 +139,11 @@ const CheckoutForm = ({ charge }) => {
         },
       });
     if (confirmError) {
-      console.log("confirm error", confirmError);
+      // console.log("confirm error", confirmError);
     } else {
-      console.log("payment intent", paymentIntent);
+      // console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        console.log("transaction Id", paymentIntent.id);
+        // console.log("transaction Id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
         toast.success(
           `Your payment is successfull and your transaction Id is ${transactionId}`,

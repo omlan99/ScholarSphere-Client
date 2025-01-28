@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const useScholarship = (find) => {
     const {user} = useAuth()
     const axiosCommon = useCommonAxios()  
-    console.log(find)
+    // console.log(find)
 
     const {refetch , data: scholarshipData=[], isLoading } =useQuery({
         queryKey : ['scholarshipData', find, user?.email],

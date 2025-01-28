@@ -28,7 +28,7 @@ const AddScholarship = () => {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(images.data);
+    // console.log(images.data);
     if (images.data.success) {
       const scholarshipData = {
         posted_date: data.posted_date,
@@ -49,7 +49,7 @@ const AddScholarship = () => {
         email: user.email,
         role: user?.role || "",
       };
-      console.log(scholarshipData);
+      // console.log(scholarshipData);
       axiosSecure.post("/scholarship", scholarshipData).then((res) => {
         Swal.fire({
           position: "center",

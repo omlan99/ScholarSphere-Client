@@ -14,7 +14,7 @@ const MyReview = () => {
   useEffect(() => {
     if (user?.email) {
       axiosCommon.get(`/reviews?email=${user?.email}`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMyReviews(res.data);
       });
     }
@@ -36,7 +36,7 @@ const MyReview = () => {
           icon: "success",
         });
         axiosCommon.delete(`/reviews/${id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setMyReviews(
             myReviews.filter((review) => review._id !== id)
           );

@@ -11,7 +11,7 @@ const SocialLogin = () => {
     const handleClick = () => {
         googleSignIn()
         .then(result=> {
-            console.log(result.user)
+            // console.log(result.user)
                Swal.fire({
                     position: "top-end",
                     icon: "success",

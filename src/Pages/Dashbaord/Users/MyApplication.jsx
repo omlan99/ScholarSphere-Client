@@ -18,12 +18,12 @@ const MyApplication = () => {
   useEffect(() => {
     if (user?.email) {
       axiosCommon.get(`/applications?email=${user.email}`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMyApplication(res.data);
       });
     }
   }, [user?.email]);
-  console.log(myApplication);
+  // console.log(myApplication);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -42,7 +42,7 @@ const MyApplication = () => {
           icon: "success",
         });
         axiosCommon.delete(`/applications/${id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setMyApplication(
             myApplication.filter((application) => application._id !== id)
           );
@@ -69,19 +69,19 @@ const MyApplication = () => {
       ...data,
     };
     axiosCommon.post("/reviews", additionalData).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       document.getElementById("my_modal_3").close();
     });
   };
   const handleEdit = () => {
-    console.log('Edit CLicked')
+
   };
 
   const handleReview = (id) => {
     document.getElementById("my_modal_3").showModal()
     axiosCommon.get(`/scholarship/${id}`)
     .then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setScholarship(res.data)
     })
   };

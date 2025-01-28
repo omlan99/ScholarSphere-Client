@@ -8,7 +8,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_paypass_key);
 
 const Payment = () => {
   const { charge } = useParams();
-  console.log(charge);
+  // console.log(charge);
   return (
     <div>
       <Elements stripe={stripePromise}>

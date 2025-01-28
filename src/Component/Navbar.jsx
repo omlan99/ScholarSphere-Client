@@ -5,7 +5,7 @@ import logo from '../assets/icons8-scholarship-64 (2).png'
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
-  console.log(user)
+  // console.log(user)
   const navOptions = (
     <>
     <li>

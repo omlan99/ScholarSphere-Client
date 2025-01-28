@@ -11,7 +11,7 @@ const MyProfile = () => {
   const axiosCommon = useCommonAxios();
   useEffect(() => {
     axiosCommon.get(`/users?email=${email}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setProfile(res.data);
     });
   }, [email]);

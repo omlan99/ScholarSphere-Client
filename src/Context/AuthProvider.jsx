@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
         const userInfo = {
           email: loggedUser.email,
         };
-        console.log(userInfo);
+        // console.log(userInfo);
         axiosSecure.post('/jwt',userInfo)
         .then(res => {
           console.log(res)

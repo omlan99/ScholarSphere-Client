@@ -7,17 +7,22 @@ const useScholarship = (find) => {
   const axiosCommon = useCommonAxios();
 
   const { refetch, data: scholarshipData = [], isLoading } = useQuery({
-    queryKey: ["scholarshipData", find, user?.email],
+    queryKey: ['scholarshipData', find, user?.email],
     queryFn: async () => {
-      // Construct the query string dynamically
-      const emailQuery = user?.email ? `email=${user.email}` : "";
-      const searchQuery = find ? `search=${find}` : "";
-      const queryString = [emailQuery, searchQuery].filter(Boolean).join("&");
+      let query = '';
 
-      const res = await axiosCommon.get(`/scholarship${queryString ? `?${queryString}` : ""}`);
+      if (user?.email) {
+        query += `email=${user.email}`;
+      }
+
+      if (find) {
+        query += query ? `&search=${find}` : `search=${find}`;
+      }
+
+      const res = await axiosCommon.get(`/scholarship${query ? `?${query}` : ''}`);
       return res.data;
     },
-    enabled: !!find || !!user?.email, // Only fetch if find or email is present
+    enabled: true, // Always enabled since we handle the conditional logic inside queryFn
   });
 
   return [scholarshipData, refetch, isLoading];

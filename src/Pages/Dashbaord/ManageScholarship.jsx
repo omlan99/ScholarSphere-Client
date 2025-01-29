@@ -23,7 +23,7 @@ const ManageScholarship = () => {
     axiosCommon.delete(`/scholarship/${id}`).then((res) => {
       if (res.data.deletedCount) {
         // console.log(res.data);
-        refetch();
+        setScholarships(scholarships.filter((scholarship) => scholarship._id !== id));
       }
     });
   };

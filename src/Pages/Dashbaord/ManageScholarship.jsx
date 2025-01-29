@@ -5,11 +5,20 @@ import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import useScholarship from "../../Hook/useScholarship";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const ManageScholarship = () => {
   const axiosCommon = useCommonAxios();
-  const [scholarships, refetch] = useScholarship("");
-  // console.log(scholarships);
+  // const [scholarships, refetch] = useScholarship("");
+  const [scholarships, setScholarships] =useState([])
+  const axiosSecure = useAxiosSecure()
+  useEffect(() =>{
+    axiosSecure('scholarship')
+    .then(res => {
+        setScholarships(res.data)
+    })
+  }, [])
+  console.log(scholarships);
   const handleDelete = (id) => {
     axiosCommon.delete(`/scholarship/${id}`).then((res) => {
       if (res.data.deletedCount) {
@@ -48,7 +57,7 @@ const ManageScholarship = () => {
                 <td></td>
                 <td>{scholarship.application_fees}</td>
                 <td>
-                 <Link to=""><FcViewDetails className="text-2xl  mx-auto"></FcViewDetails></Link>
+                 <Link to={`/scholarshipDetails/${scholarship._id}`}><FcViewDetails className="text-2xl  mx-auto"></FcViewDetails></Link>
                 </td>
                 <td>
                   <FaRegEdit className="text-2xl  mx-auto"></FaRegEdit>

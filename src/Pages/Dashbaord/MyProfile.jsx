@@ -16,7 +16,7 @@ const MyProfile = () => {
       setProfile(res.data);
     });
   }, [user?.email, axiosSecure]);
-  console.log(profile)
+
   return (
     <div>
       <SectionTitle heading={"My Profile"}></SectionTitle>

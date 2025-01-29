@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../Hook/useAuth";
 import { Link, Outlet } from "react-router-dom";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const DashboardLayout = () => {
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
+    const [currentUser, setCurrentUser] = useState()
+    useEffect(() =>{
+        axiosSecure.get(`/users/${user?.email}`)
+        .then(res => {
+            setCurrentUser(res.data)
+            
+        })
+    } , [])
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -18,7 +28,7 @@ const DashboardLayout = () => {
             {/* Sidebar content here */}
 
             {
-                user && !user.role && (<>
+                currentUser?.role === "user" && (<>
                 <li>
                     <Link to={'/dashboard/myprofile'}>My profile</Link>
                 </li>
@@ -31,7 +41,7 @@ const DashboardLayout = () => {
                 </>)
             }
             {
-                user?.role === 'moderator' && (<>
+                currentUser?.role === 'moderator' && (<>
                 <li>
                     <Link to={'/dashboard/myprofile'}>My Profile</Link>
                 </li>
@@ -50,15 +60,15 @@ const DashboardLayout = () => {
                 </>) 
             }
             {
-                user?.role === 'admin' && (<>
+                currentUser?.role === 'admin' && (<>
                 <li>
-                    <Link to={'/dashboard/myprofile'}>Admin Profile.</Link>
+                    <Link to={'/dashboard/myprofile'}>Admin Profile</Link>
                 </li>
                 <li>
                     <Link to={'/dashboard/addScholarship'}>Add Scholarship</Link>
                 </li>
                 <li>
-                    <Link to={'/dashboard/manageScholarship'} >Manage Scholarship.</Link>
+                    <Link to={'/dashboard/manageScholarship'} >Manage Scholarship</Link>
                 </li>
                 <li>
                     <Link>Manage Applied Application</Link>

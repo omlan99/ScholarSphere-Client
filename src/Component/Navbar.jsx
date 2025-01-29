@@ -13,7 +13,6 @@ const Navbar = () => {
   useEffect(() =>{
     axiosSecure.get(`/users/${user?.email}`)
     .then(res => {
-      console.log(users)
       setUsers(res.data)
     })
   }, [user?.email, axiosSecure])

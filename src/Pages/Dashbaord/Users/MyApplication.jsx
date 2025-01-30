@@ -9,15 +9,17 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { MdReviews } from "react-icons/md";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 const MyApplication = () => {
   const { user } = useAuth();
   const axiosCommon = useCommonAxios();
+  const axiosSecure = useAxiosSecure();
   const [myApplication, setMyApplication] = useState([]);
-  const [scholarship,setScholarship] = useState()
+  const [scholarship, setScholarship] = useState();
   useEffect(() => {
     if (user?.email) {
-      axiosCommon.get(`/applications?email=${user.email}`).then((res) => {
+      axiosSecure.get(`/applications?email=${user.email}`).then((res) => {
         // console.log(res.data);
         setMyApplication(res.data);
       });
@@ -61,7 +63,7 @@ const MyApplication = () => {
     const additionalData = {
       scholarship_name: scholarship.scholarship_name,
       university_name: scholarship.university_name,
-      subject_category : scholarship.subject_category,
+      subject_category: scholarship.subject_category,
       name: user.displayName,
       image: user.photoURL,
       email: user.email,
@@ -73,17 +75,26 @@ const MyApplication = () => {
       document.getElementById("my_modal_3").close();
     });
   };
-  const handleEdit = () => {
-
+  const handleEdit = (id, status) => {
+    if (status === "pending") {
+      document.getElementById("my_modal_5").showModal()
+    }
+    else{
+      
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "application under processing!",
+      });
+    }
   };
 
   const handleReview = (id) => {
-    document.getElementById("my_modal_3").showModal()
-    axiosCommon.get(`/scholarship/${id}`)
-    .then(res => {
+    document.getElementById("my_modal_3").showModal();
+    axiosCommon.get(`/scholarship/${id}`).then((res) => {
       // console.log(res.data)
-      setScholarship(res.data)
-    })
+      setScholarship(res.data);
+    });
   };
   return (
     <div>
@@ -132,7 +143,9 @@ const MyApplication = () => {
                 <td>{application.service_charge}</td>
                 <td>{application?.status}</td>
                 <td>
-                  <button onClick={() => handleReview(application.scholarship_id)}>
+                  <button
+                    onClick={() => handleReview(application.scholarship_id)}
+                  >
                     <MdReviews className="text-2xl  mx-auto" />
                   </button>
                 </td>
@@ -145,9 +158,12 @@ const MyApplication = () => {
                   </Link>
                 </td>
                 <td>
-                  <button  onClick={() => handleEdit()}>
-
-                  <FaRegEdit className="text-2xl  mx-auto"></FaRegEdit>
+                  <button
+                    onClick={() =>
+                      handleEdit(application._id, application.status)
+                    }
+                  >
+                    <FaRegEdit className="text-2xl  mx-auto"></FaRegEdit>
                   </button>
                 </td>
                 <td>
@@ -208,6 +224,27 @@ const MyApplication = () => {
               Add Review
             </button>
           </form>
+        </div>
+      </dialog>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <button
+        className="btn"
+        onClick={() => document.getElementById("my_modal_5").showModal()}
+      >
+        open modal
+      </button>
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
         </div>
       </dialog>
     </div>

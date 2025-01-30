@@ -52,7 +52,7 @@ const CheckoutForm = ({ charge }) => {
   const onSubmit = async (data) => {
     const applicationData = {
       ...data,
-      ...userData,
+      name : user.displayName,
       scholarship_fees : scholarship.application_fees,
       service_charge : scholarship.service_charge,
       university_address : scholarship.university_city,

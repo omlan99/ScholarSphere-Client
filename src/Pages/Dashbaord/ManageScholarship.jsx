@@ -6,6 +6,7 @@ import { TiDelete } from "react-icons/ti";
 import useScholarship from "../../Hook/useScholarship";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageScholarship = () => {
   const axiosCommon = useCommonAxios();
@@ -23,7 +24,25 @@ const ManageScholarship = () => {
     axiosCommon.delete(`/scholarship/${id}`).then((res) => {
       if (res.data.deletedCount) {
         // console.log(res.data);
-        setScholarships(scholarships.filter((scholarship) => scholarship._id !== id));
+        Swal.fire({
+              title: "Are you sure?",
+              text: "You want to Delete Scholarship!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, Delete it!",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire({
+                  title: "Canceled!",
+                  text: "Scholarship has been Deleted.",
+                  icon: "success",
+                });
+              
+                setScholarships(scholarships.filter((scholarship) => scholarship._id !== id));
+              }
+            });
       }
     });
   };
@@ -37,8 +56,8 @@ const ManageScholarship = () => {
             <tr>
               <th></th>
               <th>University Name</th>
-              <th>Subject</th>
-              <th>Subject Category</th>
+              <th>Scholarship Name</th>
+              <th>Scholarship Category</th>
               <th>Degree</th>
               <th>Application Fees</th>
               <th>Details</th>
@@ -52,9 +71,9 @@ const ManageScholarship = () => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{scholarship.university_name}</td>
-                <td>{scholarship.subject_name}</td>
-                <td>{scholarship.scholarship_category}</td>
-                <td></td>
+                <td>{scholarship.scholarship_name}</td>
+                <td>{scholarship.subject_category}</td>
+                <td>{scholarship.degree}</td>
                 <td>{scholarship.application_fees}</td>
                 <td>
                  <Link to={`/scholarshipDetails/${scholarship._id}`}><FcViewDetails className="text-2xl  mx-auto"></FcViewDetails></Link>
@@ -64,7 +83,7 @@ const ManageScholarship = () => {
                 </td>
                 <td>
                   <TiDelete
-                    className="text-2xl  mx-auto"
+                    className="text-2xl  mx-auto cursor-pointer"
                     onClick={() => handleDelete(scholarship._id)}
                   />
                 </td>
@@ -73,6 +92,7 @@ const ManageScholarship = () => {
           </tbody>
         </table>
       </div>
+      
     </div>
   );
 };

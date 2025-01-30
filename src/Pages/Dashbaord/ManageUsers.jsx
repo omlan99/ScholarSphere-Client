@@ -12,13 +12,48 @@ const ManageUsers = () => {
   const [selectedRolee, setSelectedRole] = useState('')
   
   const handleDeleteUser = (id) => {
-    if(users.length > 0){
-      axiosSecure.delete(`/users/${id}`).then((res) => {
-        refetch()
-      });
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to delete the user!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes!`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: `Deleted`,
+          text: `You user is deleted`,
+          icon: "success",
+        });
+      
+        if(users.length > 0){
+          axiosSecure.delete(`/users/${id}`).then((res) => {
+            console.log(res.data)
+            refetch()
+            Swal.fire(
+              "Updated!",
+              // `User role updated to ${newRole}.`,
+              "success"
+            );
+          });
+        }
+        
+          
+        
+                     
+            
+          
+        
+        
+       
+      }
+    });
+   
   };
   const handleRole = ( e, id) => {
+    console.log(e.target.value)
      Swal.fire({
           title: "Are you sure?",
           text: `You want to make him/her ${e.target.value}!`,
@@ -48,8 +83,9 @@ const ManageUsers = () => {
                   user._id === id ? { ...user, role: e.target.value } : user
                 );
                 refetch(); // Optional, to ensure consistency with the backend
-                const filtered = updatedUsers.filter(user => user.role === selectedRolee)
+                const filtered = updatedUsers.filter(user => !selectedRolee || user.role === selectedRolee)
                 setFilteredUsers(filtered);
+                refetch()                
                 Swal.fire(
                   "Updated!",
                   // `User role updated to ${newRole}.`,
@@ -113,12 +149,12 @@ const ManageUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className=" w-[20px]">
-                  <select onChange={(e) => handleRole(e, user._id)}>
+                  <select  defaultValue={user.role} onChange={(e) => handleRole(e, user._id)}>
                   
 
-                    <option >User</option>
-                    <option  >Moderator</option>
-                    <option  >Admin</option>
+                    <option value={'user'} >User</option>
+                    <option value={'moderator'}  >Moderator</option>
+                    <option value={'admin'}  >Admin</option>
                     
                   </select>
                 </td>

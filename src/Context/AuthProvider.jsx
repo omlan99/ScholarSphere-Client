@@ -51,12 +51,13 @@ const AuthProvider = ({ children }) => {
           if(res.data.token){
             localStorage.setItem('access-token', res.data.token)
           }
-
+          setLoader(false);
         })
       } else {
         localStorage.removeItem("access-token");
+        setLoader(false);
       }
-      setLoader(false);
+  
     });
     return () => {
       unsubscribe();
@@ -68,6 +69,7 @@ const AuthProvider = ({ children }) => {
       displayName: name,
       photoURL: photo,
     });
+    
   };
   const signOutUser = () => {
     setLoader(true);

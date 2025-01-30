@@ -6,14 +6,15 @@ import useAxiosSecure from "../Hook/useAxiosSecure";
 const DashboardLayout = () => {
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure()
-    const [currentUser, setCurrentUser] = useState()
+    const [currentUser, setCurrentUser] = useState([])
     useEffect(() =>{
         axiosSecure.get(`/users/${user?.email}`)
         .then(res => {
+            console.log(res.data)
             setCurrentUser(res.data)
             
         })
-    } , [])
+    } , [user?.email, axiosSecure])
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -49,7 +50,7 @@ const DashboardLayout = () => {
                     <Link to={'/dashboard/manageScholarship'}>Manage Scholarship</Link>
                 </li>
                 <li>
-                    <Link to={'allReviews'}>All Reviews</Link>
+                    <Link to={'/dashboard/allReviews'}>All Reviews</Link>
                 </li>
                 <li>
                     <Link to={"/dashboard/allApplication"}>All applied Scholarship</Link>
@@ -71,10 +72,10 @@ const DashboardLayout = () => {
                     <Link to={'/dashboard/manageScholarship'} >Manage Scholarship</Link>
                 </li>
                 <li>
-                    <Link>Manage Applied Application</Link>
+                    <Link to={"/dashboard/allApplication"}>Manage Applied Application</Link>
                 </li>
                 <li>
-                    <Link to="/dashboard/manageUsers">Manage Users.</Link>
+                    <Link to="/dashboard/manageUsers">Manage Users</Link>
                 </li>
                 <li>
                     <Link to="allReviews">Manage Review</Link>

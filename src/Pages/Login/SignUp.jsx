@@ -27,7 +27,6 @@ const SignUp = () => {
             name: data.name,
             email: data.email,
             image: data.photo,
-            role : "user"
           };
           // console.log(userInfo);
           axiosCommon
@@ -41,8 +40,8 @@ const SignUp = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                reset();
                 navigate("/");
+                reset();
               }
             })
             .catch((error) => console.log(error.message));

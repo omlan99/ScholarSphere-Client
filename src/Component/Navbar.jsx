@@ -15,7 +15,9 @@ const Navbar = () => {
     .then(res => {
       setUsers(res.data)
     })
+    
   }, [user?.email, axiosSecure])
+  console.log(users.email, users.role)
   const navOptions = (
     <>
     <li>

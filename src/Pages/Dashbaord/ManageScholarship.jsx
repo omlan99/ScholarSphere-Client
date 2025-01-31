@@ -12,7 +12,7 @@ import useAuth from "../../Hook/useAuth";
 
 const ManageScholarship = () => {
   const axiosCommon = useCommonAxios();
-  const {user} = useAuth()
+  const { user } = useAuth();
   // const [scholarships, refetch] = useScholarship("");
   const [scholarships, setScholarships] = useState([]);
   const [editScholarship, setEditScholarship] = useState({});
@@ -77,9 +77,11 @@ const ManageScholarship = () => {
       }
     });
   };
-  const onSubmit = (data) => {console.log};
+  const onSubmit = (data) => {
+    document.getElementById('my_modal_3').close()
+  };
   const handleEdit = (id) => {
-    document.getElementById("my_modal_5").showModal();
+    document.getElementById('my_modal_3').showModal()
     axiosSecure.get(`scholarship/${id}`).then((res) => {
       setEditScholarship(res.data);
     });
@@ -134,21 +136,19 @@ const ManageScholarship = () => {
           </tbody>
         </table>
       </div>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_5").showModal()}
-      >
-        open modal
-      </button>
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+     l
+     
+      <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
-          <div className="modal-action">
-            <form className="card-body " onSubmit={handleSubmit(onSubmit)}>
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+        <div>
+        <form className="card-body " onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-3 gap-3">
                 <div className="form-control col-span-3">
                   <label className="label">
@@ -396,11 +396,11 @@ const ManageScholarship = () => {
 
               <div className="form-control mt-6">
                 <button className="btn btn-primary" type="submit">
-                  Login
+                  Update
                 </button>
               </div>
             </form>
-          </div>
+        </div>
         </div>
       </dialog>
     </div>

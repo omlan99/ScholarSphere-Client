@@ -10,13 +10,15 @@ const Navbar = () => {
   const axiosSecure = useAxiosSecure()
   const [users , setUsers] = useState({})
   console.log(user?.email)
-  useEffect(() =>{
-    axiosSecure.get(`/users/${user?.email}`)
-    .then(res => {
-      setUsers(res.data)
-    })
-    
-  }, [user?.email, axiosSecure])
+  useEffect(() => {
+    if (user?.email) { 
+      axiosSecure.get(`/users/${user.email}`)
+        .then(res => {
+          setUsers(res.data);
+        })
+        .catch(error => console.error("Error fetching user data:", error));
+    }
+  }, [user]);
   console.log(users.email, users.role)
   const navOptions = (
     <>
@@ -26,9 +28,9 @@ const Navbar = () => {
       <li>
       <Link to={'/AllScholarship'}>All Scholarship</Link>
       </li>
-      {users?.role === 'user' && (<li><Link to={"dashboard/myprofile"}>User Dashboard</Link></li>) }
-      {users?.role === 'admin' &&   ( <li><Link to={"dashboard/myprofile"}>Admin Dashboard</Link></li>)}
-      {users?.role === 'moderator' && (<li><Link to={"dashboard/myprofile"}>Moderator Dashboard</Link></li>)}
+      {user?.role && users?.role === 'user' && (<li><Link to={"dashboard/myprofile"}>User Dashboard</Link></li>) }
+      {users?.role && users?.role === 'admin' &&   ( <li><Link to={"dashboard/myprofile"}>Admin Dashboard</Link></li>)}
+      {users?.role && users?.role === 'moderator' && (<li><Link to={"dashboard/myprofile"}>Moderator Dashboard</Link></li>)}
     </>
   );
 

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import ReviewCard from "../../Component/ReviewCard";
 import Apply from "./Apply";
 import BannerSlider from "./BannerSlider";
+import Contact from "./Contact";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       </Helmet>
       <BannerSlider></BannerSlider>
         <Apply></Apply>
+        <Contact></Contact>
      
     </div>
   );

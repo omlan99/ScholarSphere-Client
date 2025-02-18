@@ -88,7 +88,7 @@ export default {
           "accent": "#478294", // Change accent color
           "neutral": "#1E293B", // Change neutral color
           "base-100": "#e8edee", // Change background color
-          "base-200": "#EDEFEC", // Change background color
+          "base-200": "#DDE2E3", // Change background color
           "base-300": "#EBEFEF", // Change background color
           "base-400": "#EdEFEc", // Change background color
           "base-content": "#0c0d0e", // Change background color

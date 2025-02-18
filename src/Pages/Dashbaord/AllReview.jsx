@@ -28,7 +28,7 @@ const AllReview = () => {
   };
 
   return (
-    <div>
+    <div className="mt-[ ] ">
       <div className="py-5">
         <SectionTitle heading={"All Reviews"}></SectionTitle>
       </div>

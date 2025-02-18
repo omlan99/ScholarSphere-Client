@@ -137,7 +137,7 @@ const ManageScholarship = () => {
         </table>
       </div>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
-     l
+     
      
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">

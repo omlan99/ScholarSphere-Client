@@ -62,7 +62,7 @@ const AllScholarship = () => {
                   placeholder="Search for university, degree, Subject"
                   className="input w-full max-w-sm border border-black "
                 />
-                <button onClick={handleSearch} className="btn">
+                <button onClick={handleSearch} className="btn btn-primary">
                   Search
                 </button>
               </div>

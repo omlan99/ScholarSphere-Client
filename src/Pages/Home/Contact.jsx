@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
     return (
-        <div>
+        <div className='mb-[100px]'>
             <div className='grid lg:grid-cols-2 p-5 bg-base-200 my-10'>
                 <div className='p-[100px] text-4xl font-bold'>
                 Connect with Our Team

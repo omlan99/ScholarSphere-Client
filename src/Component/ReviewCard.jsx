@@ -46,7 +46,7 @@ const ReviewCard = ({ review, deleteReview }) => {
           </p>
           <div className="card-actions justify-end mt-5">
             <button
-              className="btn btn-danger"
+              className="btn btn-primary"
               onClick={() => deleteReview(review._id)}
             >
               Delete

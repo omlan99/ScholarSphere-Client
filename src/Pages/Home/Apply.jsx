@@ -2,7 +2,7 @@ import image from '../../assets/girl.png'
 
 const Apply = () => {
   return (
-    <div className="grid md:grid-cols-2 gap-5">
+    <div className="grid md:grid-cols-2 gap-5 mb-[100px]">
       <div>
         <img src={image} alt="" />
       </div>

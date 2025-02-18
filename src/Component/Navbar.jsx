@@ -144,12 +144,12 @@ const Navbar = () => {
                   <img src={user?.photoURL} />
                 </div>
               </div>
-              <Link onClick={handleLogOut} className="btn">
+              <Link onClick={handleLogOut} className="btn btn-primary">
                 Logout
               </Link>
             </div>
           ) : (
-            <Link to={"/login"} className="btn">
+            <Link to={"/login"} className="btn btn-primary">
               Login
             </Link>
           )}

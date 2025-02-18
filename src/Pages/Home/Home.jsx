@@ -20,17 +20,40 @@ const Home = () => {
       </Helmet>
       <BannerSlider></BannerSlider>
       <div className="mb-[100px]">
-        <h2 className="font-bold text-4xl text-center pb-10">Scholarships</h2>
-        <div className=" grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 p-5">
+        <h2 className="font-bold text-4xl text-center py-4">Scholarships</h2>
+        <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-center gap-4 my-5 p-5">
           {slicedScholarship.map((scholarship, idx) => (
             <Card scholarship={scholarship} key={idx}></Card>
           ))}
         </div>
         <div className="py-4 flex justify-center">
-          <Link className="btn btn-primary btn-wide" to={"/AllScholarship"}>Vew All</Link>
+          <Link className="btn btn-primary btn-wide" to={"/AllScholarship"}>
+            Vew All
+          </Link>
         </div>
       </div>
       <Apply></Apply>
+      <div className="mb-[100px]">
+        <div className="stats shadow w-full">
+          <div className="stat place-items-center">
+            <div className="stat-title">Applicants</div>
+            <div className="stat-value">31K</div>
+            <div className="stat-desc">From January 1st to February 1st</div>
+          </div>
+
+          <div className="stat place-items-center">
+            <div className="stat-title">Scholarship</div>
+            <div className="stat-value ">4,200</div>
+            <div className="stat-desc">↗︎ 40 (2%)</div>
+          </div>
+
+          <div className="stat place-items-center">
+            <div className="stat-title">University</div>
+            <div className="stat-value">1,200</div>
+            <div className="stat-desc">↘︎ 90 (14%)</div>
+          </div>
+        </div>
+      </div>
       <PhotoSlider></PhotoSlider>
       <Contact></Contact>
     </div>

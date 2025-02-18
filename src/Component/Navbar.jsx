@@ -138,8 +138,8 @@ const Navbar = () => {
 
           {user ? (
             <div className="flex items-center gap-4">
-              <p className="font-semibold">{user?.displayName}</p>
-              <div className="avatar">
+              <p className="font-semibold hidden md:block">{user?.displayName}</p>
+              <div className="avatar hidden md:block">
                 <div className="w-12">
                   <img src={user?.photoURL} />
                 </div>

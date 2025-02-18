@@ -72,7 +72,7 @@ const AllScholarship = () => {
             {scholarships.length > 0 ? (
               <>
                 {" "}
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 p-5">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-center gap-4 my-10 p-5">
                   {sortedScholarships.map((scholarship, idx) => (
                     <Card scholarship={scholarship} key={idx}></Card>
                   ))}

@@ -20,16 +20,18 @@ const MyProfile = () => {
   return (
     <div>
       <SectionTitle heading={"My Profile"}></SectionTitle>
-      <div className="flex gap-9 my-5">
-        <div className="w-[80px]">
+     <div className="flex justify-center items-center">
+     <div className="flex gap-16 my-5 ">
+        <div className="w-[80px] ">
           <img src={profile.image} alt="" />
         </div>
         <div>
-          <p>Name : {profile.name} </p>
-          <p> Email : {profile.email}</p>
-          <p> Role : {profile.role ? <span>{profile.role}</span> : <></>}</p>
+          <p className="py-2">Name : {profile.name} </p>
+          <p className="py-2"> Email : {profile.email}</p>
+          <p className="py-2"> Role : {profile.role ? <span>{profile.role}</span> : <></>}</p>
         </div>
       </div>
+     </div>
     </div>
   );
 };

@@ -3,12 +3,13 @@ import SectionTitle from "../../Component/SectionTitle";
 import useScholarship from "../../Hook/useScholarship";
 import Card from "../../Component/Card";
 import { FcSearch } from "react-icons/fc";
-import { FaFaceSadCry } from "react-icons/fa6";
+import { FaArrowDown, FaArrowUp, FaFaceSadCry } from "react-icons/fa6";
 
 const AllScholarship = () => {
   const [search, setSearch] = useState("");
   const [find, setFind] = useState("");
-  const [scholarships, isLoading] = useScholarship(find);
+  const [isAscending, setIsAscending] = useState(true);
+  const [scholarships, isLoading, refetch] = useScholarship(find);
   const handleSearch = () => {
     setFind(search);
   };
@@ -21,24 +22,50 @@ const AllScholarship = () => {
       setFind(""); // Reset query to fetch all data
     }
   };
- 
+  const handleSort = () => {
+    setIsAscending(!isAscending);
+  };
+  const sortedScholarships = [...scholarships].sort((a, b) =>
+    isAscending
+      ? a.application_deadline.localeCompare(b.application_deadline)
+      : b.application_deadline.localeCompare(a.application_deadline)
+  );
+
   return (
-    <div>
+    <div className="my-[100px]">
       <div>
         <SectionTitle heading={"All Scholarship"}></SectionTitle>
         <div>
           <div>
-            <div className="flex justify-center gap-5 my-10 ">
-              <input
-                value={search}
-                onChange={handleInputChange}
-                type="text"
-                placeholder="Search for university, degree, Subject"
-                className="input w-full max-w-2xl border-2 border-indigo-100"
-              />
-              <button onClick={handleSearch} className="btn">
-                Search
+            <div className="flex justify-between items-center gap-5 my-10  px-5">
+              <button
+              className="btn btn-primary"
+                onClick={handleSort}
+              >
+                {isAscending ? (
+                  <>
+                   Sort by Fees
+                    <FaArrowDown></FaArrowDown>
+                  </>
+                ) : (
+                  <>
+                    Sort by Fees
+                    <FaArrowUp></FaArrowUp>{" "}
+                  </>
+                )}
               </button>
+              <div className="flex gap-2 w-full justify-end">
+                <input
+                  value={search}
+                  onChange={handleInputChange}
+                  type="text"
+                  placeholder="Search for university, degree, Subject"
+                  className="input w-full max-w-sm border border-black "
+                />
+                <button onClick={handleSearch} className="btn">
+                  Search
+                </button>
+              </div>
             </div>
           </div>
           <div>
@@ -46,7 +73,7 @@ const AllScholarship = () => {
               <>
                 {" "}
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 p-5">
-                  {scholarships.map((scholarship, idx) => (
+                  {sortedScholarships.map((scholarship, idx) => (
                     <Card scholarship={scholarship} key={idx}></Card>
                   ))}
                 </div>

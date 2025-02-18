@@ -312,7 +312,7 @@ const AddScholarship = () => {
 
           <div className="form-control mt-6">
             <button className="btn btn-primary" type="submit">
-              Login
+              Add Scholarship
             </button>
           </div>
         </form>

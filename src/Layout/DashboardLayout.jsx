@@ -6,15 +6,30 @@ import useAxiosSecure from "../Hook/useAxiosSecure";
 const DashboardLayout = () => {
     const {user} = useAuth()
     const axiosSecure = useAxiosSecure()
+    const [loading, setLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState([])
     useEffect(() =>{
-        axiosSecure.get(`/users/${user?.email}`)
-        .then(res => {
-            console.log(res.data)
-            setCurrentUser(res.data)
+        if(user?.email){
+            axiosSecure.get(`/users/${user?.email}`)
+            .then(res => {
+                console.log(res.data)
+                setCurrentUser(res.data)
+                setLoading(false)
+                
+            })
+            .catch(error =>{
+                console.log(error)
+                setLoading(false)
+            })
             
-        })
+        }else{
+            setLoading(false)
+        }
+     
     } , [user?.email, axiosSecure])
+    if(loading){
+        return <div className="w-1/4  h-screen flex  justify-center items-center"><span className="loading loading-spinner loading-lg"></span></div>
+    }
   return (
     <div>
       <div className="drawer lg:drawer-open">

@@ -10,7 +10,7 @@ const PhotoSlider = () => {
     <div className="mb-[100px]">
         <h2 className="font-bold text-4xl text-center pb-10">Our associate college</h2>
       <Swiper
-      slidesPerView={4}
+      slidesPerView={3}
         spaceBetween={20}
         loop={true}
         centeredSlides={true}
@@ -21,7 +21,7 @@ const PhotoSlider = () => {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
+        // navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
       >
         <SwiperSlide>

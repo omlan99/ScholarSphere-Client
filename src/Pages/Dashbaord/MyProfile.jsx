@@ -18,10 +18,10 @@ const MyProfile = () => {
   }, [user?.email, axiosSecure]);
 
   return (
-    <div>
+    <div className="">
       <SectionTitle heading={"My Profile"}></SectionTitle>
-     <div className="flex justify-center items-center">
-     <div className="flex gap-16 my-5 ">
+     <div className="flex justify-center items-center ">
+     <div className="flex gap-16 my-5 p-5 rounded-xl bg-[#111e22] text-white w-1/2">
         <div className="w-[80px] ">
           <img src={profile.image} alt="" />
         </div>

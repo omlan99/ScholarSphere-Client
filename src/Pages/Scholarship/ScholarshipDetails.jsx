@@ -21,9 +21,11 @@ const ScholarshipDetails = () => {
   return (
     <div>
       <HelmetCompo pageName={"Details"}></HelmetCompo>
-      <div className="flex items-center gap-5">
-        <img className="w-[200px]" src={scholarship.university_image} alt="" />
-        <div className="p-10 w-4/5">
+      <div className="grid lg:grid-cols-3 items-center gap-5 my-[100px]">
+        <div className=" p-5 flex justify-center">
+        <img className="w-full object-contain" src={scholarship.university_image} alt="" />
+        </div>
+        <div className="p-10 w-4/5 col-span-2">
           <p>
             <span className="font-semibold capitalize">Scholarship name</span> :{" "}
             {scholarship.scholarship_name}

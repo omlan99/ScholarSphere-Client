@@ -8,6 +8,8 @@ import PhotoSlider from "./PhotoSlider";
 import Card from "../../Component/Card";
 import useScholarship from "../../Hook/useScholarship";
 import { Link } from "react-router-dom";
+import Faq from "./Faq";
+import Stats from "./Stats";
 
 const Home = () => {
   const [scholarships] = useScholarship();
@@ -33,29 +35,10 @@ const Home = () => {
         </div>
       </div>
       <Apply></Apply>
-      <div className="mb-[100px]">
-        <div className="stats shadow w-full">
-          <div className="stat place-items-center">
-            <div className="stat-title">Applicants</div>
-            <div className="stat-value">31K</div>
-            <div className="stat-desc">From January 1st to February 1st</div>
-          </div>
-
-          <div className="stat place-items-center">
-            <div className="stat-title">Scholarship</div>
-            <div className="stat-value ">4,200</div>
-            <div className="stat-desc">↗︎ 40 (2%)</div>
-          </div>
-
-          <div className="stat place-items-center">
-            <div className="stat-title">University</div>
-            <div className="stat-value">1,200</div>
-            <div className="stat-desc">↘︎ 90 (14%)</div>
-          </div>
-        </div>
-      </div>
+      <Stats></Stats>
       <PhotoSlider></PhotoSlider>
       <Contact></Contact>
+      <Faq></Faq>
     </div>
   );
 };

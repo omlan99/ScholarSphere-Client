@@ -10,6 +10,7 @@ import useScholarship from "../../Hook/useScholarship";
 import { Link } from "react-router-dom";
 import Faq from "./Faq";
 import Stats from "./Stats";
+import Review from "./Review";
 
 const Home = () => {
   const [scholarships] = useScholarship();
@@ -34,10 +35,11 @@ const Home = () => {
           </Link>
         </div>
       </div>
+      <PhotoSlider></PhotoSlider>
       <Apply></Apply>
       <Stats></Stats>
-      <PhotoSlider></PhotoSlider>
       <Contact></Contact>
+      <Review></Review>
       <Faq></Faq>
     </div>
   );

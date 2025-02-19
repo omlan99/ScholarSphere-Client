@@ -1,19 +1,25 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
-    return (
-        <div className='mb-[100px]'>
-            <div className='grid lg:grid-cols-2 p-5 bg-base-200 my-10'>
-                <div className='p-[100px] text-4xl font-bold'>
-                Connect with Our Team
-                </div>
-                <div className='m-auto '>
-                    <p className='pb-4 font-medium'>If you have a question regarding the any of our scholarship opportunities, please contact scholarships@sdfoundation.org or submit a contact form.</p>
-                    <button className='btn btn-primary'>Submit a contact form</button>
-                </div>
-                </div>    
-        </div>
-    );
+  return (
+    <div className="mb-[100px]">
+      <div
+        className="space-y-2 bg-accent   py-[100px]  text-center"
+        id="newsletter"
+      >
+        <h3 className="font-bold text-4xl">
+          Sign up for our Monthly Newsletter!
+        </h3>
+        <p className="font-semibold pb-10">
+          Want to be updated with new visa news
+        </p>
+        <Link to={"/signup"} className="btn btn-wide">
+          Register Now
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default Contact;

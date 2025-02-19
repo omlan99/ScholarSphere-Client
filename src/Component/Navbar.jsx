@@ -31,13 +31,13 @@ const Navbar = () => {
         <HashLink smooth to="/#scholarship">Scholarships</HashLink>
       </li>
       <li>
-        <HashLink smooth to="/#contact">Contact</HashLink>
-      </li>
-      <li>
         <HashLink smooth to="/#universities">Universities</HashLink>
       </li>
       <li>
         <Link to={"/AllScholarship"}>All Scholarship</Link>
+      </li>
+      <li>
+        <HashLink smooth to="/#contact">Contact</HashLink>
       </li>
       {
         user? <><li><HashLink smooth to="/#reviews">Reviews</HashLink></li></>: <></>

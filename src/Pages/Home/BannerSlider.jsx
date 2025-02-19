@@ -34,7 +34,7 @@ const BannerSlider = () => {
                 {" "}
                 Turn Your Dreams into Reality! Apply for Scholarships Today{" "}
               </p>
-              <Link to={""} href="" className="btn btn-primary">View Scholarship</Link>
+              <Link to={"/AllScholarship"} href="" className="btn btn-primary">View Scholarship</Link>
             </div>  
           </div>
         </SwiperSlide>
@@ -46,7 +46,7 @@ const BannerSlider = () => {
                 {" "}
                 Hassle-Free Applications – Get Started in Minutes!{" "}
               </p>
-              <Link to={""} href="" className="btn btn-primary">View Scholarship</Link>
+              <Link to={"/AllScholarship"} href="" className="btn btn-primary">View Scholarship</Link>
             </div>  
           </div>
         </SwiperSlide>
@@ -58,7 +58,7 @@ const BannerSlider = () => {
                 {" "}
                 Unlock Global Education & Career Growth with Scholarships{" "}
               </p>
-              <Link to={""} href="" className="btn btn-primary">View Scholarship</Link>
+              <Link to={"/AllScholarship"} href="" className="btn btn-primary">View Scholarship</Link>
             </div>  
           </div>
         </SwiperSlide>

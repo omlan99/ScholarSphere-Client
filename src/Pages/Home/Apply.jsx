@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import image from '../../assets/girl.png'
 
 const Apply = () => {
@@ -29,7 +30,7 @@ const Apply = () => {
             applying for scholarships.
           </p>
         </div>
-        <button className="btn btn-primary btn-wide  mt-8">Apply</button>
+        <Link to={"/AllScholarship"} className="btn btn-primary btn-wide  mt-8">Apply</Link>
       </div>
     </div>
    </div>

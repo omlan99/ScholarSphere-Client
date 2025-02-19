@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
-    <div className="mb-[100px]">
+    <div className="mb-[100px] ">
       <div
-        className="space-y-2 bg-accent   py-[100px]  text-center"
+        className="space-y-2 bg-accent px-5 py-[100px]  text-center"
         id="newsletter"
       >
         <h3 className="font-bold text-4xl">

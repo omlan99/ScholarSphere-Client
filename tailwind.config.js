@@ -14,7 +14,7 @@ export default {
   ],
   daisyui: {
     themes: [
-      "light",
+      "myLightTheme",
       {
         myLightTheme : {
           // colors: {

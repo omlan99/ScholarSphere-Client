@@ -40,9 +40,9 @@ const Navbar = () => {
         <HashLink smooth to="/#contact">Contact</HashLink>
       </li>
       {
-        user? <><li><HashLink smooth to="/#reviews">Reviews</HashLink></li></>: <></>
+        users? <><li><HashLink smooth to="/#reviews">Reviews</HashLink></li></>: <></>
       }
-      {user?.role && users?.role === "user" && (
+      {users?.role === "user" && (
         <li>
           <Link to={"dashboard/myprofile"}>User Dashboard</Link>
         </li>

@@ -22,7 +22,8 @@ const Home = () => {
         <title>ScholarSphere | Home</title>
       </Helmet>
       <BannerSlider></BannerSlider>
-      <div className="mb-[100px]">
+      <div id="scholarship">
+      <div className="pt-[100px]" >
         <h2 className="font-bold text-4xl text-center pb-10">Scholarships</h2>
         <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-center gap-4 my-5 p-5">
           {slicedScholarship.map((scholarship, idx) => (
@@ -35,7 +36,8 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <PhotoSlider></PhotoSlider>
+      </div>
+      <PhotoSlider ></PhotoSlider>
       <Apply></Apply>
       <Stats></Stats>
       <Contact></Contact>

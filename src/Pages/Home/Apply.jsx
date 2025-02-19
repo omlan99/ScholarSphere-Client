@@ -2,7 +2,8 @@ import image from '../../assets/girl.png'
 
 const Apply = () => {
   return (
-    <div className="grid md:grid-cols-2 gap-5 mb-[100px] px-5">
+   <div className='pt-[100px]'>
+     <div className="grid md:grid-cols-2 gap-5  p-5">
       <div>
         <img src={image} alt="" />
       </div>
@@ -31,6 +32,7 @@ const Apply = () => {
         <button className="btn btn-primary btn-wide  mt-8">Apply</button>
       </div>
     </div>
+   </div>
   );
 };
 

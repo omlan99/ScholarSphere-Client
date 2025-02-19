@@ -16,6 +16,8 @@ const ManageScholarship = () => {
   // const [scholarships, refetch] = useScholarship("");
   const [scholarships, setScholarships] = useState([]);
   const [editScholarship, setEditScholarship] = useState({});
+  const [loading, setLoading] = useState(true);
+  
   const axiosSecure = useAxiosSecure();
   const {
     register,
@@ -46,8 +48,16 @@ const ManageScholarship = () => {
   useEffect(() => {
     axiosSecure.get("scholarship").then((res) => {
       setScholarships(res.data);
+      setLoading(false)
     });
   }, []);
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex  justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   console.log(scholarships);
   const handleDelete = (id) => {
     axiosCommon.delete(`/scholarship/${id}`).then((res) => {

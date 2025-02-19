@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const BannerSlider = () => {
   return (
     <>
-      <div className="mt-[70px] mb-[100px]">
+      <div className="mt-[70px]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

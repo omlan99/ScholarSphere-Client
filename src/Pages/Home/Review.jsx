@@ -17,7 +17,8 @@ const Review = () => {
   const slicedReview = reviews.slice(0, 3);
   console.log(slicedReview);
   return (
-    <div className="mb-[100px]">
+    <div id="reviews">
+        <div className="pt-[100px]" >
           <h2 className="font-bold text-4xl text-center pb-10">Student's Review </h2>
       <div className="grid lg:grid-cols-3 gap-5 px-5">
         {slicedReview.map((review, index) => (
@@ -52,6 +53,7 @@ const Review = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

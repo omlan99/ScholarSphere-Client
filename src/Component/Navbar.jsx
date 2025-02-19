@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import logo from "../assets/icons8-scholarship-64 (2).png";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../Hook/useAxiosSecure";
+import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
@@ -27,8 +28,20 @@ const Navbar = () => {
         <Link>Home</Link>
       </li>
       <li>
+        <HashLink smooth to="/#scholarship">Scholarships</HashLink>
+      </li>
+      <li>
+        <HashLink smooth to="/#contact">Contact</HashLink>
+      </li>
+      <li>
+        <HashLink smooth to="/#universities">Universities</HashLink>
+      </li>
+      <li>
         <Link to={"/AllScholarship"}>All Scholarship</Link>
       </li>
+      {
+        user? <><li><HashLink smooth to="/#reviews">Reviews</HashLink></li></>: <></>
+      }
       {user?.role && users?.role === "user" && (
         <li>
           <Link to={"dashboard/myprofile"}>User Dashboard</Link>
@@ -97,7 +110,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow "
             >
               {navOptions}
             </ul>
@@ -108,7 +121,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+          <ul className="menu menu-horizontal px-1 space-x-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
           <div className="mr-4">

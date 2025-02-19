@@ -7,14 +7,21 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 const AllReview = () => {
   const axiosSecure = useAxiosSecure();
   const [reviews, setReviews] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axiosSecure.get("/reviews").then((res) => {
       // console.log(res.data);
       setReviews(res.data);
+      setLoading(false);
     });
   }, []);
-
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex  justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   const deleteReview = (reviewId) => {
     axiosCommon
       .delete(`/reviews/${reviewId}`)

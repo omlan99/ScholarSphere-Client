@@ -2,7 +2,7 @@ import React from "react";
 
 const Faq = () => {
   return (
-    <div className="mb-[100px] px-5">
+    <div className="pt-[100px] px-5">
         <h2 className="text-4xl p-4">Frequently Asked Questin</h2>
       <div className="collapse bg-base-200">
         <input type="radio" name="my-accordion-1" defaultChecked />

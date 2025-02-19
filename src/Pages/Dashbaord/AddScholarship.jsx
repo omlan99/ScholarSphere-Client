@@ -8,6 +8,7 @@ const image_hosting_key = import.meta.env.VITE_image_key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddScholarship = () => {
   const { user } = useAuth();
+  
   // const axiosCommon = useCommonAxios();
   const axiosSecure = useAxiosSecure()
   const {

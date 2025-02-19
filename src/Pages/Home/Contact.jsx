@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
-    <div className="mb-[100px] ">
+    <div id="contact">
+      <div className="pt-[100px]" >
       <div
         className="space-y-2 bg-accent px-5 py-[100px]  text-center"
         id="newsletter"
@@ -18,6 +19,7 @@ const Contact = () => {
           Register Now
         </Link>
       </div>
+    </div>
     </div>
   );
 };

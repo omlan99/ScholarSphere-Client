@@ -8,15 +8,18 @@ const MyProfile = () => {
   const { user } = useAuth();
   const [profile, setProfile] = useState([]);
   const axiosSecure = useAxiosSecure()
-  
+  const [loading, setLoading] = useState(true)
   const axiosCommon = useCommonAxios();
   useEffect(() => {
     axiosSecure.get(`/users/${user?.email}`).then((res) => {
       console.log(res.data);
       setProfile(res.data);
+      setLoading(false)
     });
   }, [user?.email, axiosSecure]);
-
+  if(loading){
+    return <div className="w-full h-screen flex  justify-center items-center"><span className="loading loading-spinner loading-lg"></span></div>
+}
   return (
     <div className="">
       <SectionTitle heading={"My Profile"}></SectionTitle>

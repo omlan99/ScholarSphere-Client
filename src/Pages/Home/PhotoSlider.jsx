@@ -7,7 +7,8 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const PhotoSlider = () => {
   return (
-    <div className="mb-[100px]">
+   <div id="universities">
+     <div className="pt-[100px]" >
       <div className="flex justify-center">
       <h2 className="font-bold text-4xl text-center pb-10">
        Collaborated  University 
@@ -82,6 +83,7 @@ const PhotoSlider = () => {
         </SwiperSlide>
       </Swiper>
     </div>
+   </div>
   );
 };
 

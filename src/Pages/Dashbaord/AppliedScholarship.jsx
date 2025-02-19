@@ -7,20 +7,27 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { VscFeedback } from "react-icons/vsc";
 import Swal from "sweetalert2";
 
-
 const AppliedScholarship = () => {
   const axiosSecure = useAxiosSecure();
   const [applications, setApplications] = useState([]);
   const [displayApplication, setDisplayApplication] = useState([]);
-  const [feedback, setFeedback] = useState("")
-  const [feedbackId, setFeedBackId] = useState('')
+  const [feedback, setFeedback] = useState("");
+  const [feedbackId, setFeedBackId] = useState("");
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axiosSecure.get("/applications").then((res) => {
       // console.log(res.data);
       setApplications(res.data);
+      setLoading(false);
     });
   }, []);
-
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex  justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   const handleDetails = (id) => {
     document.getElementById("my_modal_3").showModal();
     axiosSecure.get(`applications/${id}`).then((res) => {
@@ -29,17 +36,17 @@ const AppliedScholarship = () => {
     });
   };
   const handleFeedback = (id) => {
-    document.getElementById('my_modal_1').showModal()
-    setFeedBackId(id)
-      
+    document.getElementById("my_modal_1").showModal();
+    setFeedBackId(id);
   };
-  const submitReview = () =>{
+  const submitReview = () => {
     const updateData = {
-      feedback : feedback
-    }
-    axiosSecure.patch(`/applications/${feedbackId}`, updateData)
-    .then(res => console.log(res.data))
-  }
+      feedback: feedback,
+    };
+    axiosSecure
+      .patch(`/applications/${feedbackId}`, updateData)
+      .then((res) => console.log(res.data));
+  };
 
   const handleCancel = (id) => {
     Swal.fire({
@@ -104,7 +111,7 @@ const AppliedScholarship = () => {
                 </td>
                 <td>
                   <VscFeedback
-                    onClick={() =>handleFeedback(application._id)}
+                    onClick={() => handleFeedback(application._id)}
                     className="text-2xl  mx-auto cursor-pointer"
                   />
                 </td>
@@ -160,32 +167,30 @@ const AppliedScholarship = () => {
         </div>
       </dialog>
 
-    
-      
-     
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-{/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button> */}
-<dialog id="my_modal_1" className="modal">
-  <div className="modal-box">
-    <h3 className="font-bold text-lg text-center mb-4">Give Review!</h3>
+      {/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button> */}
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center mb-4">Give Review!</h3>
           <div className="w-full flex justify-center">
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered w-full max-w-xs"
-          value = {feedback}
-          onChange={(e) =>setFeedback(e.target.value)}
-        />
-      </div>
-    <div className="modal-action">
-      <form method="dialog">
-        {/* if there is a button in form, it will close the modal */}
-        <button onClick={submitReview} className="btn">Close</button>
-      </form>
-     
-    </div>
-  </div>
-</dialog>
+            <input
+              type="text"
+              placeholder="Type here"
+              className="input input-bordered w-full max-w-xs"
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+            />
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button onClick={submitReview} className="btn">
+                Close
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

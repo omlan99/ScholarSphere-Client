@@ -3,7 +3,7 @@ import React from 'react';
 const Stats = () => {
     return (
         <div>
-             <div className="mb-[100px] px-5">
+             <div className="pt-[100px] px-5">
         <div className="stats shadow w-full  stats-vertical lg:stats-horizontal md:mx-auto ">
           <div className="stat place-items-center">
             <div className="stat-title">Applicants</div>

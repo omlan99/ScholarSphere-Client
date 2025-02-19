@@ -15,7 +15,7 @@ import Review from "./Review";
 const Home = () => {
   const [scholarships] = useScholarship();
   const slicedScholarship = scholarships.slice(0, 3);
-  console.log(slicedScholarship);
+
   return (
     <div>
       <Helmet>
@@ -23,7 +23,7 @@ const Home = () => {
       </Helmet>
       <BannerSlider></BannerSlider>
       <div className="mb-[100px]">
-        <h2 className="font-bold text-4xl text-center py-4">Scholarships</h2>
+        <h2 className="font-bold text-4xl text-center pb-10">Scholarships</h2>
         <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-center gap-4 my-5 p-5">
           {slicedScholarship.map((scholarship, idx) => (
             <Card scholarship={scholarship} key={idx}></Card>

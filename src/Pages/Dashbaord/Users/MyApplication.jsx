@@ -19,7 +19,7 @@ const MyApplication = () => {
   const [scholarship, setScholarship] = useState();
   useEffect(() => {
     if (user?.email) {
-      axiosSecure.get(`/applications?email=${user.email}`).then((res) => {
+      axiosSecure.get(`/myApplications?email=${user.email}`).then((res) => {
         // console.log(res.data);
         setMyApplication(res.data);
       });
@@ -132,7 +132,7 @@ const MyApplication = () => {
           <tbody>
             {/* row 1 */}
             {myApplication.map((application, index) => (
-              <tr>
+              <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{application.university_name}</td>
                 <td>{application.university_address}</td>
@@ -227,12 +227,12 @@ const MyApplication = () => {
         </div>
       </dialog>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <button
+      {/* <button
         className="btn"
         onClick={() => document.getElementById("my_modal_5").showModal()}
       >
         open modal
-      </button>
+      </button> */}
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Hello!</h3>

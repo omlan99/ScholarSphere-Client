@@ -12,7 +12,7 @@ const DashboardLayout = () => {
         if(user?.email){
             axiosSecure.get(`/users/${user?.email}`)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setCurrentUser(res.data)
                 setLoading(false)
                 
@@ -27,7 +27,9 @@ const DashboardLayout = () => {
         }
      
     } , [user?.email, axiosSecure])
- 
+    if(loading){
+        return <div className="w-1/4  h-screen flex  justify-center items-center"><span className="loading loading-spinner loading-lg"></span></div>
+    }
   return (
     <div>
       <div className="drawer lg:drawer-open">

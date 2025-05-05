@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SectionTitle from "../../Component/SectionTitle";
 import useScholarship from "../../Hook/useScholarship";
 import Card from "../../Component/Card";
@@ -9,7 +9,8 @@ const AllScholarship = () => {
   const [search, setSearch] = useState("");
   const [find, setFind] = useState("");
   const [isAscending, setIsAscending] = useState(true);
-  const [scholarships, isLoading, refetch] = useScholarship(find);
+  // const [scholarships, isLoading, refetch] = useScholarship(find);
+  u
   const handleSearch = () => {
     setFind(search);
   };
@@ -30,7 +31,9 @@ const AllScholarship = () => {
       ? a.application_deadline.localeCompare(b.application_deadline)
       : b.application_deadline.localeCompare(a.application_deadline)
   );
-
+  useEffect(()=>{
+    axios.get('http://localhost:5000/scholarship')
+  },[])
   return (
     <div className="my-[100px]">
       <div>

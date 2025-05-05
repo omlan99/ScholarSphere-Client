@@ -15,9 +15,9 @@ const useScholarship = (find) => {
     queryFn: async () => {
       let query = "";
 
-      if (user?.email) {
-        query += `email=${user.email}`;
-      }
+      // if (user?.email) {
+      //   query += `email=${user.email}`;
+      // }
 
       if (find) {
         query += query ? `&search=${find}` : `search=${find}`;
